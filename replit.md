@@ -1,6 +1,6 @@
-# [Project name]
+# BodyFit Dynasty
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+Aplicación móvil de fitness, nutrición y comunidad para ayudar a las personas a entrenar, registrar su alimentación y seguir su progreso.
 
 ## Run & Operate
 
@@ -10,6 +10,7 @@ _Replace the heading above with the project's name, and this line with one sente
 - `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
 - `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
 - Required env: `DATABASE_URL` — Postgres connection string
+- `pnpm --filter @workspace/bodyfit-dynasty run typecheck` — check the mobile app
 
 ## Stack
 
@@ -22,23 +23,32 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/bodyfit-dynasty/` — Expo mobile app and router screens
+- `artifacts/bodyfit-dynasty/constants/colors.ts` — BodyFit Dynasty dark palette
+- `artifacts/bodyfit-dynasty/context/BodyFitContext.tsx` — local daily stats and workout state
+- `artifacts/bodyfit-dynasty/components/bodyfit.tsx` — shared mobile UI primitives
+- `artifacts/bodyfit-dynasty/assets/images/` — brand icon and generated fitness imagery
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- The first mobile build is Expo/React Native so it can run in Expo Go and be published for iOS through the workspace.
+- Daily dashboard state uses AsyncStorage while the backend and external integrations remain opt-in for a later phase.
+- Payments are represented only as an informational membership screen; Apple Pay, in-app purchases and SINPE Móvil are not active.
+- Native device access is used for the food workflow through the camera and photo library permissions.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+The app includes Inicio, Rutinas, Comunidad, Progreso and Perfil in Spanish, plus food analysis, membership plans and local daily tracking. The visual identity follows the supplied BodyFit Dynasty logo and black, purple, gold and white palette.
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+- The product owner is the user; BodyFit Dynasty is their project and brand.
+- User prefers communication in Spanish.
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- The mobile workflow is `artifacts/bodyfit-dynasty: expo`; use the workflow rather than starting Expo manually.
+- Firebase, Apple Health, AI inference/video generation and the trainer admin panel still require a later integration phase.
 
 ## Pointers
 

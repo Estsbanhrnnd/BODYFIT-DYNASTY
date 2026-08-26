@@ -1,0 +1,79 @@
+Quiero que crees una aplicación móvil para iOS (SwiftUI) llamada “BodyFit Dynasty ®” con los colores negro, morado y dorado, usando este logo: (adjunto imagen). La app debe incluir las siguientes funcionalidades:
+
+1. Dashboard (Inicio)
+
+Mostrar calorías consumidas vs objetivo, macros (proteína, carbohidratos, grasas), agua, pasos, calorías quemadas, gráfico de actividad diaria, streak (días consecutivos) y objetivos diarios personalizables.
+
+2. Analizar comida con IA
+
+Permitir tomar foto de la comida y que la IA calcule calorías, proteína, carbohidratos y grasas. Guardar registro diario de comidas.
+
+3. Rutinas
+
+Permitir crear rutinas personalizadas por día, con ejercicios, series, repeticiones, peso, descanso y videos cortos (máx. 10 segundos) explicando la técnica del ejercicio.
+
+Los videos deben generarse automáticamente con IA a partir de la descripción del ejercicio (usuario/entrenador) o se pueden subir manualmente.
+
+4. Comunidad
+
+Feed tipo red social para que los usuarios publiquen fotos, logros y progresos, puedan dar like, comentar y seguir a otros usuarios. Grupos temáticos.
+
+5. Progreso
+
+Comparar fotos antes y después, medidas, peso y gráficos de evolución.
+
+6. Perfil de usuario
+
+Estadísticas, objetivos, configuraciones y logros.
+
+7. Sincronización con Apple Health
+
+Para pasos, distancia, actividad y calorías activas.
+
+8. Streaks y objetivos diarios
+
+Permitir rachas por cumplir calorías, pasos, entrenos, agua, etc., con recordatorios y notificaciones.
+
+9. Arquitectura lista para pagos (sin activar aún)
+
+Dejar preparada la estructura para habilitar Apple Pay / In-App Purchases y pagos con SINPE Móvil en el futuro sin reconstruir la app.
+
+Solo crear la interfaz de membresías y planes (básico, premium, élite) en modo no activo.
+
+10. Panel administrativo (para mí como entrenador)
+
+Web/admin integrado para crear y editar rutinas, ejercicios, subir videos, gestionar usuarios y contenido.
+
+Requisitos técnicos
+
+* SwiftUI
+* Firebase (Auth, Firestore, Storage, Cloud Functions)
+* IA para análisis de alimentos con cámara y cálculo de macros
+* Generación de videos cortos con IA a partir de la descripción/imagen del ejercicio
+* Código organizado, modular y escalable
+* Estructura preparada para futuras funciones
+* Código limpio y comentado
+
+Diseño visual
+
+La aplicación debe tener una estética premium, moderna, deportiva y juvenil, utilizando principalmente:
+
+* Negro
+* Morado
+* Dorado
+* Blanco
+* Gris oscuro
+
+Usar el logo de BodyFit Dynasty ® que se adjunta como identidad principal de la aplicación.
+
+La navegación principal debe incluir:
+
+Inicio | Rutinas | Comunidad | Progreso | Perfil
+
+Notas importantes
+
+Los pagos (Apple Pay / In-App Purchases y SINPE Móvil) NO deben estar habilitados en esta versión, pero la aplicación debe quedar preparada para activarlos posteriormente.
+
+Los videos de ejercicios deben durar máximo 10 segundos y mostrar correctamente la técnica del ejercicio.
+
+La app debe ser 100% editable y escalable para poder agregar nuevas funciones fácilmente en futuras actualizaciones.
