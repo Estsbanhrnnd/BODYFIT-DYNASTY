@@ -1,0 +1,474 @@
+BODYFIT DYNASTY® — CORRECCIÓN OBLIGATORIA DE MEMBRESÍAS Y ANÁLISIS DE COMIDA
+
+IMPORTANTE:
+Ya implementaste cambios anteriores, pero hay DOS problemas que siguen sin resolverse correctamente:
+
+1. El análisis de comida sigue identificando incorrectamente los alimentos.
+2. La pantalla de membresías NO muestra correctamente los nombres y precios oficiales de cada plan.
+
+NO quiero solamente cambios visuales o textos simulados. Necesito que revises la lógica real de la aplicación y corrijas la funcionalidad.
+
+==================================================
+1. MEMBRESÍAS OFICIALES
+==================================================
+
+Estas son las CUATRO membresías oficiales de BodyFit Dynasty®:
+
+🆓 STANDARD
+GRATIS
+₡0
+
+🥉 BRONZE
+₡5.500
+
+💎 PLATINUM
+₡14.590
+
+👑 GOLDEN
+₡22.500
+
+IMPORTANTE:
+Estos nombres y precios deben aparecer EXACTAMENTE en la pantalla de selección/comparación de membresías.
+
+No utilizar nombres como:
+"Basic"
+"Premium"
+"Gold"
+"Pro"
+"Free Plan"
+
+Los nombres oficiales son:
+
+STANDARD
+BRONZE
+PLATINUM
+GOLDEN
+
+Los precios oficiales son:
+
+STANDARD → Gratis / ₡0
+BRONZE → ₡5.500
+PLATINUM → ₡14.590
+GOLDEN → ₡22.500
+
+==================================================
+2. DISEÑO DE LA PANTALLA DE MEMBRESÍAS
+==================================================
+
+Crear/ajustar una pantalla premium de comparación de planes.
+
+Cada plan debe tener:
+
+- Nombre.
+- Precio.
+- Descripción corta.
+- Principales beneficios.
+- Funciones bloqueadas/desbloqueadas.
+- Botón para seleccionar el plan.
+
+Debe existir una imagen/ilustración descriptiva para cada membresía, integrada visualmente con la identidad de BodyFit Dynasty®.
+
+Mantener la identidad visual actual:
+- Negro.
+- Morado.
+- Dorado.
+- Estética deportiva.
+- Premium.
+- Juvenil.
+- Moderna.
+
+NO hacer que la pantalla parezca una tabla genérica de precios.
+
+==================================================
+3. STANDARD — ₡0
+==================================================
+
+Nombre:
+STANDARD
+
+Precio:
+GRATIS
+
+Incluye:
+
+- 5% inicial del catálogo de ejercicios.
+- Aproximadamente 2 ejercicios por grupo muscular.
+- Puede desbloquear progresivamente hasta 15% del catálogo viendo anuncios.
+- Conteo de pasos.
+- Streaks.
+- 3 recetas gratuitas de muestra.
+
+NO incluye:
+
+- Escaneo de comidas.
+- Análisis nutricional.
+- Conteo de calorías/macros.
+
+Recetas iniciales:
+1. Chocolate saludable.
+2. Ensalada saludable.
+3. Bebida saludable.
+
+==================================================
+4. BRONZE — ₡5.500
+==================================================
+
+Nombre:
+BRONZE
+
+Precio:
+₡5.500
+
+Incluye:
+
+- 25% del catálogo de ejercicios.
+- 1 escaneo de comida por día.
+- Conteo de calorías/macros estimados.
+- Conteo de pasos.
+- Streaks.
+- 5 recetas por categoría.
+
+Categorías:
+
+- Desayunos.
+- Almuerzos.
+- Cenas.
+- Snacks.
+- Snacks dulces saludables.
+
+Total inicial:
+25 recetas.
+
+Después de utilizar el escaneo diario:
+
+El usuario puede ver 3 anuncios recompensados para obtener 1 escaneo adicional.
+
+Debe funcionar realmente mediante Rewarded Ads.
+
+==================================================
+5. PLATINUM — ₡14.590
+==================================================
+
+Nombre:
+PLATINUM
+
+Precio:
+₡14.590
+
+Incluye:
+
+- 50% del catálogo de ejercicios.
+- Análisis de comidas.
+- Escaneo de platos.
+- Estimación de calorías.
+- Estimación de proteínas.
+- Estimación de carbohidratos.
+- Estimación de grasas.
+- Conteo de pasos.
+- Streaks.
+- 15 recetas por categoría.
+
+Categorías:
+
+- Desayunos.
+- Almuerzos.
+- Cenas.
+- Snacks.
+- Snacks dulces saludables.
+
+Total inicial:
+75 recetas.
+
+PLATINUM NO debe mostrar anuncios.
+
+==================================================
+6. GOLDEN — ₡22.500
+==================================================
+
+Nombre:
+GOLDEN
+
+Precio:
+₡22.500
+
+Incluye:
+
+- 100% del catálogo de ejercicios.
+- Análisis de comidas.
+- Nutrición.
+- Plan de alimentación personalizado.
+- Recetas personalizadas.
+- 25 recetas por categoría.
+- Gym Scan.
+- Sistema de medallas.
+- Cardio.
+- Streaks.
+- Chat 24/7 con entrenadores.
+- Comunidad Golden.
+
+Categorías de recetas:
+
+- Desayunos.
+- Almuerzos.
+- Cenas.
+- Snacks.
+- Snacks dulces saludables.
+
+Total inicial:
+125 recetas.
+
+Las recetas Golden deben poder actualizarse posteriormente y deben existir recetas nuevas provenientes de la comunidad Golden que puedan ser seleccionadas/agregadas al catálogo.
+
+GOLDEN NO debe mostrar anuncios.
+
+==================================================
+7. ENTRENAMIENTO PRESENCIAL
+==================================================
+
+IMPORTANTE:
+
+El entrenamiento presencial NO está incluido en ninguna membresía.
+
+Es un servicio completamente independiente.
+
+No mostrarlo como beneficio incluido de Standard, Bronze, Platinum o Golden.
+
+==================================================
+8. PROBLEMA CRÍTICO — ANÁLISIS DE COMIDA
+==================================================
+
+La función actual de análisis de comida sigue fallando.
+
+Ya se realizó una prueba real:
+
+La fotografía mostraba claramente una HAMBURGUESA CON PAPAS FRITAS.
+
+La aplicación respondió:
+
+"Bowl de pollo"
+
+y mostró:
+
+"94% preciso"
+
+Esto es INCORRECTO.
+
+NO quiero simplemente cambiar el texto "Bowl de pollo" por "Hamburguesa".
+
+Necesito que revises la implementación real de la IA de visión que está utilizando la aplicación.
+
+==================================================
+9. REVISAR LA IMPLEMENTACIÓN REAL DE IA
+==================================================
+
+Antes de modificar la interfaz, revisa:
+
+- Qué modelo de IA está utilizando actualmente.
+- Qué API está utilizando.
+- Qué prompt está enviando.
+- Qué información devuelve el modelo.
+- Cómo se procesa la respuesta.
+- Cómo se convierte la respuesta en alimentos/macros.
+- Si existe algún resultado mockeado/hardcodeado.
+- Si el resultado actual está siendo generado realmente por una API de visión.
+- Si existe una base de datos nutricional conectada.
+- Cómo se determina actualmente el porcentaje de "precisión".
+
+Si el resultado actual está hardcodeado, simulado o utilizando datos de prueba, ELIMINAR esa lógica y conectarlo correctamente al sistema de IA que corresponda.
+
+NO crear resultados falsos para hacer parecer que funciona.
+
+==================================================
+10. NUEVO FLUJO CORRECTO
+==================================================
+
+El flujo debe ser:
+
+FOTO
+↓
+ANÁLISIS VISUAL REAL
+↓
+IDENTIFICAR LOS ALIMENTOS VISIBLES
+↓
+MOSTRAR LOS ALIMENTOS DETECTADOS
+↓
+USUARIO CONFIRMA O CORRIGE
+↓
+ESTIMAR PORCIONES
+↓
+CALCULAR ESTIMACIÓN NUTRICIONAL
+↓
+USUARIO GUARDA LA COMIDA
+
+NO:
+
+FOTO
+↓
+ADIVINAR UN PLATO COMPLETO
+↓
+MOSTRAR MACROS COMO SI FUERAN EXACTOS
+
+==================================================
+11. EJEMPLO DE RESULTADO CORRECTO
+==================================================
+
+Si el usuario toma una fotografía de una hamburguesa con papas, el sistema debería intentar identificar algo parecido a:
+
+🍔 Hamburguesa
+
+Elementos detectados:
+
+- Pan de hamburguesa.
+- Carne de res.
+- Queso, si es visible.
+- Vegetales, si son visibles.
+- Salsa, si es visible.
+
+🍟 Papas fritas
+
+Porción visual estimada:
+Pequeña / Mediana / Grande
+
+Después mostrar:
+
+¿La identificación es correcta?
+
+[Editar alimentos]
+
+[Confirmar]
+
+==================================================
+12. PORCIONES
+==================================================
+
+La fotografía NO permite conocer con exactitud el peso de los alimentos.
+
+Por eso, cuando sea necesario, permitir al usuario seleccionar/modificar:
+
+- Pequeña.
+- Mediana.
+- Grande.
+
+O introducir manualmente una cantidad/peso cuando sea posible.
+
+La IA puede hacer una estimación inicial, pero el usuario debe poder corregirla.
+
+==================================================
+13. MACROS
+==================================================
+
+Los valores derivados de una fotografía deben presentarse como ESTIMACIONES.
+
+Utilizar:
+
+"Calorías estimadas"
+
+"Proteína estimada"
+
+"Carbohidratos estimados"
+
+"Grasas estimadas"
+
+NO utilizar una cifra como si fuera una medición exacta.
+
+NO afirmar que la aplicación puede conocer con exactitud los gramos de comida solamente mediante una fotografía.
+
+==================================================
+14. PORCENTAJE DE CONFIANZA
+==================================================
+
+Eliminar el sistema actual que muestra algo como:
+
+"94% preciso"
+
+si ese porcentaje no representa una métrica real y validada de identificación.
+
+Si se utiliza una puntuación de confianza, debe corresponder únicamente a la identificación visual y debe explicarse claramente.
+
+Nunca utilizar un porcentaje de confianza para hacer creer que los macros calculados son 94% exactos.
+
+==================================================
+15. BASE NUTRICIONAL
+==================================================
+
+Después de identificar los alimentos, utilizar una fuente/base nutricional adecuada para obtener los valores nutricionales.
+
+Separar claramente:
+
+VISIÓN:
+¿Qué alimentos parece detectar la IA?
+
+NUTRICIÓN:
+¿Qué valores nutricionales corresponden a esos alimentos y a la porción seleccionada?
+
+No mezclar ambas cosas como si la fotografía pudiera medir directamente las calorías.
+
+==================================================
+16. IMPORTANTE PARA COMIDAS COSTARRICENSES
+==================================================
+
+Preparar la arquitectura para reconocer alimentos y comidas comunes de Costa Rica, además de alimentos internacionales.
+
+Ejemplos:
+
+- Gallo pinto.
+- Casado.
+- Arroz con pollo.
+- Olla de carne.
+- Chifrijo.
+- Picadillo.
+- Tamales.
+- Plátano maduro.
+- Frijoles.
+- Tortillas.
+- Natilla.
+- Etc.
+
+No limitar el sistema únicamente a platos estadounidenses.
+
+==================================================
+17. VALIDACIÓN ANTES DE DARLO POR TERMINADO
+==================================================
+
+Después de realizar los cambios, NO me digas simplemente:
+
+"Ya está corregido."
+
+Necesito que hagas una revisión técnica y me informes:
+
+1. Qué modelo/API está utilizando actualmente.
+2. Qué estaba causando el error.
+3. Qué archivos modificaste.
+4. Qué cambiaste.
+5. Cómo se procesa ahora una fotografía.
+6. Cómo se calculan los macros.
+7. Cómo funciona la confirmación/corrección del usuario.
+8. Cómo se controla el acceso según Standard/Bronze/Platinum/Golden.
+9. Cómo funcionan los Rewarded Ads.
+10. Qué falta configurar con credenciales/API keys reales.
+
+NO inventes credenciales.
+NO inventes API keys.
+NO inventes AdMob IDs.
+NO simules que una API está funcionando si todavía no está configurada.
+
+==================================================
+18. REGLA FINAL
+==================================================
+
+Conservar toda la aplicación existente y su diseño.
+
+NO rehacer BodyFit Dynasty® desde cero.
+
+NO eliminar funciones existentes.
+
+NO crear información ficticia.
+
+Las membresías oficiales y precios son:
+
+STANDARD — GRATIS
+BRONZE — ₡5.500
+PLATINUM — ₡14.590
+GOLDEN — ₡22.500
+
+Implementar las funciones reales y dejar claramente diferenciados los permisos de cada membresía.
