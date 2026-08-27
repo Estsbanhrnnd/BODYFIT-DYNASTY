@@ -15,8 +15,9 @@ const exercises = [
 
 export default function RoutinesScreen() {
   const colors = useColors();
-  const { workoutDone, toggleWorkout } = useBodyFit();
+  const { workoutDone, toggleWorkout, canAccessFullTraining } = useBodyFit();
   const [selectedDay, setSelectedDay] = useState('Hoy');
+  const visibleExercises = canAccessFullTraining ? exercises : exercises.slice(0, 1);
   return (
     <Screen>
       <TopBar title="Rutinas" subtitle="Tu plan, a tu ritmo" />
@@ -31,7 +32,7 @@ export default function RoutinesScreen() {
       </View>
       <GradientRoutineHeader colors={colors} />
       <SectionHeader title={selectedDay === 'Hoy' ? 'Pecho & Tríceps' : 'Entrenamientos recientes'} action="Editar" />
-      {selectedDay === 'Hoy' ? exercises.map((exercise, index) => (
+      {selectedDay === 'Hoy' ? visibleExercises.map((exercise) => (
         <Pressable key={exercise.name} onPress={() => undefined} style={({ pressed }) => [{ opacity: pressed ? 0.75 : 1, marginBottom: 10 }]}>
           <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.border, padding: 10, flexDirection: 'row', alignItems: 'center' }]}>
             <View style={{ position: 'relative' }}>
@@ -53,6 +54,13 @@ export default function RoutinesScreen() {
           <Text style={{ color: colors.mutedForeground, fontSize: 12, marginTop: 6 }}>Completa tu primera rutina para comenzar.</Text>
         </View>
       )}
+      {!canAccessFullTraining && selectedDay === 'Hoy' ? <Pressable onPress={() => undefined} style={{ marginBottom: 10 }}>
+        <View style={{ backgroundColor: '#2A1A0B', borderRadius: 18, borderWidth: 1, borderColor: '#654A17', padding: 16, flexDirection: 'row', alignItems: 'center' }}>
+          <Feather name="lock" size={17} color={colors.gold} />
+          <View style={{ flex: 1, marginLeft: 11 }}><Text style={{ color: colors.gold, fontWeight: '700', fontSize: 13 }}>3 ejercicios bloqueados</Text><Text style={{ color: '#C8BBA0', fontSize: 11, marginTop: 4 }}>Desbloquea el plan Premium para completar la rutina.</Text></View>
+          <Feather name="chevron-right" size={17} color={colors.gold} />
+        </View>
+      </Pressable> : null}
       <View style={{ marginTop: 8 }}>
         <PrimaryButton title={workoutDone ? 'Rutina completada' : 'Iniciar rutina'} icon={workoutDone ? 'check' : 'play'} onPress={toggleWorkout} />
       </View>

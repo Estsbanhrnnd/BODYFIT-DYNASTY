@@ -22,8 +22,14 @@ type BodyFitContextValue = {
   hydrated: boolean;
   addWater: () => void;
   addMeal: (calories: number, protein: number, carbs: number, fats: number) => void;
+  setSteps: (steps: number) => void;
   toggleWorkout: () => void;
   workoutDone: boolean;
+  isOwner: boolean;
+  previewClientFree: boolean;
+  setPreviewClientFree: (value: boolean) => void;
+  canUseFoodAI: boolean;
+  canAccessFullTraining: boolean;
 };
 
 const initialStats: DailyStats = {
@@ -49,6 +55,7 @@ export function BodyFitProvider({ children }: { children: React.ReactNode }) {
   const [stats, setStats] = useState<DailyStats>(initialStats);
   const [hydrated, setHydrated] = useState(false);
   const [workoutDone, setWorkoutDone] = useState(false);
+  const [previewClientFree, setPreviewClientFree] = useState(false);
 
   useEffect(() => {
     AsyncStorage.getItem(STORAGE_KEY)
@@ -76,10 +83,16 @@ export function BodyFitProvider({ children }: { children: React.ReactNode }) {
           carbs: current.carbs + carbs,
           fats: current.fats + fats,
         })),
+      setSteps: (steps) => setStats((current) => ({ ...current, steps: Math.max(0, Math.round(steps)) })),
       toggleWorkout: () => setWorkoutDone((current) => !current),
       workoutDone,
+      isOwner: true,
+      previewClientFree,
+      setPreviewClientFree,
+      canUseFoodAI: !previewClientFree,
+      canAccessFullTraining: !previewClientFree,
     }),
-    [hydrated, stats, workoutDone],
+    [hydrated, previewClientFree, stats, workoutDone],
   );
 
   return <BodyFitContext.Provider value={value}>{children}</BodyFitContext.Provider>;

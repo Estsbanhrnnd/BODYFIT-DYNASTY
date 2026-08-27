@@ -1,0 +1,511 @@
+BODYFIT DYNASTY® — INTEGRACIÓN DE GOOGLE ADMOB Y SISTEMA DE MONETIZACIÓN
+
+IMPORTANTE:
+NO rehagas la aplicación desde cero.
+NO elimines ninguna función existente.
+NO cambies innecesariamente el diseño actual.
+Primero analiza la arquitectura actual del proyecto y determina si estamos usando React Native, Expo, Expo Router, web/PWA, Capacitor u otra tecnología.
+
+Quiero integrar Google AdMob de forma REAL y preparada para producción en la aplicación iOS de BodyFit Dynasty®.
+
+La aplicación ya fue registrada en Google AdMob como:
+
+BodyFit Dynasty
+Plataforma: iOS
+
+==================================================
+1. CONFIGURACIÓN ADMOB
+==================================================
+
+Preparar la aplicación para utilizar Google Mobile Ads / AdMob.
+
+NO inventes ni escribas IDs de AdMob falsos.
+
+Los App IDs y Ad Unit IDs reales deberán configurarse mediante variables de entorno/configuración segura cuando yo los obtenga desde AdMob.
+
+Crear una estructura clara para:
+
+ADMOB_IOS_APP_ID
+ADMOB_REWARDED_AD_UNIT_ID
+ADMOB_INTERSTITIAL_AD_UNIT_ID
+ADMOB_NATIVE_AD_UNIT_ID
+
+Si la arquitectura actual requiere otra configuración específica para Expo/EAS, React Native, Capacitor o iOS nativo, utiliza el método oficialmente compatible con la arquitectura existente.
+
+NO colocar claves privadas ni información sensible directamente en el código fuente.
+
+==================================================
+2. REWARDED ADS — FUNCIÓN PRINCIPAL
+==================================================
+
+El formato principal de publicidad será REWARDED ADS.
+
+El usuario debe recibir una recompensa únicamente después de que el anuncio haya sido completado correctamente y AdMob confirme la recompensa.
+
+NO entregar la recompensa simplemente porque el usuario tocó el botón.
+
+Crear un servicio reutilizable:
+
+AdService / RewardedAdService
+
+con funciones similares a:
+
+loadRewardedAd()
+showRewardedAd()
+isRewardedAdReady()
+handleReward()
+preloadNextRewardedAd()
+
+La implementación final debe adaptarse al framework real de la aplicación.
+
+==================================================
+3. STANDARD — SISTEMA DE DESBLOQUEO POR ADS
+==================================================
+
+STANDARD es GRATIS.
+
+El usuario comienza con únicamente el 5% del catálogo de ejercicios desbloqueado.
+
+Esto equivale aproximadamente a 2 ejercicios por grupo muscular.
+
+Ejemplo:
+
+Pecho → 2
+Espalda → 2
+Bíceps → 2
+Tríceps → 2
+Hombros → 2
+Cuádriceps → 2
+Femoral → 2
+Glúteos → 2
+Pantorrillas → 2
+Abdomen → 2
+etc.
+
+IMPORTANTE:
+
+STANDARD empieza en 5%.
+
+NO debe empezar en 15%.
+
+El usuario puede desbloquear progresivamente ejercicios adicionales viendo anuncios recompensados.
+
+El límite máximo de desbloqueo mediante anuncios será 15% del catálogo total.
+
+Cuando llegue al 15%:
+
+"No hay más ejercicios disponibles mediante anuncios.
+Actualiza tu membresía para desbloquear más ejercicios."
+
+La lógica debe estar controlada por permisos/membresía y no simplemente ocultando botones.
+
+==================================================
+4. DESBLOQUEO INDIVIDUAL
+==================================================
+
+Cuando un usuario Standard encuentre un ejercicio bloqueado:
+
+Mostrar una tarjeta premium:
+
+🔒 EJERCICIO BLOQUEADO
+
+"Ve un anuncio para desbloquear este ejercicio."
+
+Botón:
+
+▶ VER ANUNCIO
+
+Al completar correctamente el Rewarded Ad:
+
+→ desbloquear el ejercicio correspondiente
+→ actualizar el porcentaje de ejercicios desbloqueados
+→ guardar el desbloqueo en la cuenta del usuario
+→ mostrar confirmación
+
+Ejemplo:
+
+"🎉 ¡Ejercicio desbloqueado!"
+
+El desbloqueo debe mantenerse después de cerrar y volver a abrir la aplicación.
+
+==================================================
+5. BRONZE — ESCANEO DE COMIDA
+==================================================
+
+BRONZE cuesta ₡5.500.
+
+Incluye:
+
+- 25% del catálogo de ejercicios.
+- 1 análisis/escaneo de comida por día.
+- Conteo de pasos.
+- Streaks.
+
+El primer escaneo de comida diario NO requiere publicidad.
+
+Después de utilizarlo:
+
+"Tu escaneo gratuito de hoy ya fue utilizado."
+
+"¿Quieres analizar otra comida?"
+
+"Ve 3 anuncios para desbloquear otro escaneo."
+
+Botón:
+
+▶ VER 3 ANUNCIOS
+
+Debe funcionar así:
+
+Anuncio 1 → recompensa válida
+Anuncio 2 → recompensa válida
+Anuncio 3 → recompensa válida
+
+Cuando los tres anuncios hayan sido completados correctamente:
+
+→ +1 escaneo de comida
+→ permitir realizar el análisis
+→ registrar el uso correctamente
+
+NO otorgar el escaneo si uno de los anuncios no fue completado/recompensado.
+
+El contador de anuncios debe mantenerse correctamente aunque el usuario cierre/reabra la pantalla.
+
+==================================================
+6. FRECUENCIA DE ADS
+==================================================
+
+NO quiero anuncios excesivos.
+
+Los Rewarded Ads deben aparecer principalmente cuando el usuario decide voluntariamente:
+
+- Desbloquear ejercicios.
+- Obtener escaneos adicionales de comida en Bronze.
+
+NO mostrar automáticamente un Rewarded Ad sin que el usuario lo solicite.
+
+Los anuncios intersticiales deben implementarse únicamente si tienen sentido para la experiencia y nunca deben interferir con ejercicios, rutinas o navegación importante.
+
+==================================================
+7. PLANS Y ADS
+==================================================
+
+La aplicación tendrá:
+
+STANDARD
+Gratis
+Ads activos
+
+BRONZE
+₡5.500
+Ads únicamente para escaneos adicionales de comida y cualquier otra recompensa que posteriormente se defina.
+
+PLATINUM
+₡14.590
+SIN ADS.
+
+GOLDEN
+₡22.500
+SIN ADS.
+
+El sistema debe consultar el plan actual del usuario antes de mostrar publicidad.
+
+Si el usuario es Platinum o Golden:
+
+→ NO mostrar Rewarded Ads.
+→ NO mostrar interstitials.
+→ NO mostrar banners publicitarios.
+
+==================================================
+8. SISTEMA DE RECETAS
+==================================================
+
+Todas las membresías tendrán recetas, con diferentes cantidades.
+
+STANDARD:
+3 recetas iniciales:
+
+- Chocolate saludable.
+- Ensalada saludable.
+- Bebida saludable.
+
+BRONZE:
+5 por categoría:
+
+- Desayuno
+- Almuerzo
+- Cena
+- Snack
+- Snack dulce saludable
+
+Total inicial: 25.
+
+PLATINUM:
+15 por categoría.
+
+Total inicial: 75.
+
+GOLDEN:
+25 por categoría.
+
+Total inicial: 125.
+
+Las recetas Golden deben poder actualizarse posteriormente sin tener que reconstruir toda la aplicación.
+
+==================================================
+9. GOLDEN
+==================================================
+
+Golden incluye:
+
+- 100% de ejercicios.
+- Análisis de comidas.
+- Plan alimenticio personalizado.
+- Recetas.
+- Gym Scan.
+- Medallas.
+- Streaks.
+- Sistema de cardio.
+- Chat 24/7 con entrenadores.
+- Comunidad Golden.
+
+NO mostrar publicidad a Golden.
+
+==================================================
+10. GYM SCAN
+==================================================
+
+Gym Scan será EXCLUSIVO DE GOLDEN.
+
+El usuario podrá tomar fotografías o realizar un recorrido en video de su gimnasio.
+
+La IA deberá identificar el equipo disponible.
+
+Ejemplos:
+
+- Mancuernas
+- Barras
+- Discos
+- Bancos
+- Smith
+- Rack
+- Poleas
+- Leg Press
+- Hack Squat
+- Leg Extension
+- Leg Curl
+- Chest Press
+- Pec Deck
+- Shoulder Press
+- Lat Pulldown
+- Seated Row
+- Abductor
+- Adductor
+- Máquinas de glúteos
+- etc.
+
+El usuario debe poder corregir manualmente lo que la IA detecte.
+
+==================================================
+11. GENERADOR DE RUTINAS
+==================================================
+
+La IA puede generar una PROPUESTA de rutina utilizando:
+
+- Datos del usuario.
+- Objetivo.
+- Experiencia.
+- Días disponibles.
+- Duración.
+- Equipo detectado por Gym Scan.
+- Biblioteca de ejercicios.
+- Variantes disponibles.
+
+PERO:
+
+LA IA NUNCA DEBE PUBLICAR AUTOMÁTICAMENTE LA RUTINA.
+
+Debe enviarla primero al panel del entrenador/administrador.
+
+El entrenador podrá:
+
+- Aprobar.
+- Editar.
+- Cambiar ejercicios.
+- Cambiar variantes.
+- Cambiar series.
+- Cambiar repeticiones.
+- Cambiar descansos.
+- Regenerar ejercicios.
+- Regenerar días.
+- Rechazar la propuesta.
+
+Solamente después de:
+
+"APROBAR RUTINA"
+
+la rutina estará disponible para el usuario.
+
+==================================================
+12. BIBLIOTECA AUDIOVISUAL
+==================================================
+
+La biblioteca debe utilizar una estructura:
+
+GRUPO MUSCULAR
+↓
+FAMILIA DE MOVIMIENTO
+↓
+VARIANTES
+
+Ejemplo:
+
+PECHO
+→ Press inclinado
+
+Variantes:
+
+- Barra
+- Mancuernas
+- Smith
+- Máquina
+- Polea
+
+Cada variante tendrá su propio video.
+
+No quiero que la aplicación se vea saturada con cientos de ejercicios casi iguales.
+
+==================================================
+13. ANÁLISIS DE COMIDA — CORRECCIÓN PRIORITARIA
+==================================================
+
+La versión actual tiene un problema.
+
+Durante las pruebas, una fotografía de una hamburguesa con papas fue identificada como:
+
+"Bowl de pollo"
+
+con:
+
+"94% preciso"
+
+Esto debe corregirse.
+
+El sistema debe funcionar como:
+
+FOTO
+↓
+IA identifica alimentos visibles
+↓
+muestra los elementos detectados
+↓
+USUARIO CONFIRMA O CORRIGE
+↓
+se estiman calorías/macros
+↓
+usuario guarda la comida
+
+Por ejemplo, para una hamburguesa:
+
+- Pan
+- Carne
+- Queso
+- Vegetales
+- Salsa
+
+Y para las papas:
+
+- Papas fritas
+- Porción estimada
+
+El usuario debe poder corregir los alimentos y las cantidades.
+
+IMPORTANTE:
+
+No presentar como exactos los macros obtenidos exclusivamente mediante fotografía.
+
+Utilizar términos como:
+
+"Estimación nutricional"
+
+"Calorías estimadas"
+
+"Proteína estimada"
+
+"Carbohidratos estimados"
+
+"Grasas estimadas"
+
+La IA debe ser capaz de identificar correctamente alimentos antes de calcular sus valores nutricionales.
+
+NO mostrar porcentajes de confianza engañosos como "94% preciso" para los macros.
+
+==================================================
+14. ENTRENAMIENTO PRESENCIAL
+==================================================
+
+El entrenamiento presencial NO está incluido en ninguna membresía.
+
+Es un servicio completamente independiente.
+
+NO incluirlo como beneficio de:
+
+Standard
+Bronze
+Platinum
+Golden
+
+Debe quedar preparado como servicio independiente para una futura sección de contratación/pago.
+
+==================================================
+15. ARQUITECTURA FUTURA
+==================================================
+
+Preparar el código para poder agregar posteriormente:
+
+- Pagos/suscripciones.
+- Códigos promocionales.
+- Apple In-App Purchase.
+- Más métodos de pago cuando correspondan.
+- Nuevas membresías.
+- Nuevas recetas.
+- Nuevos ejercicios.
+- Nuevos videos.
+- Nuevas recompensas.
+- Más sistemas de comunidad.
+
+NO implementar métodos de pago improvisados que puedan entrar en conflicto con las reglas de Apple.
+
+==================================================
+16. IMPORTANTE — NO ROMPER LA APP
+==================================================
+
+Antes de realizar cambios:
+
+1. Analiza todo el proyecto actual.
+2. Identifica el framework y arquitectura.
+3. Identifica cómo está funcionando actualmente la autenticación.
+4. Identifica cómo se almacenan usuarios y membresías.
+5. Identifica cómo está construida la biblioteca de ejercicios.
+6. Identifica cómo funciona actualmente el análisis de comidas.
+7. Identifica dónde debe integrarse AdMob.
+8. No elimines funciones existentes.
+9. No reemplaces componentes funcionales sin necesidad.
+10. Mantén la identidad visual actual de BodyFit Dynasty®.
+
+Antes de implementar, dame un resumen de:
+
+- Arquitectura actual.
+- Cambios que vas a realizar.
+- Archivos que vas a modificar.
+- Dependencias nuevas necesarias.
+- Cómo vas a integrar AdMob.
+- Cómo vas a controlar las recompensas.
+- Cómo vas a controlar los permisos por membresía.
+
+Después implementa los cambios de forma modular y segura.
+
+NO inventes AdMob IDs.
+NO inventes API keys.
+NO inventes credenciales.
+Utiliza placeholders/configuración segura hasta que yo proporcione los IDs reales de AdMob.

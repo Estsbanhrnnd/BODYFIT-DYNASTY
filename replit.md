@@ -33,8 +33,10 @@ Aplicación móvil de fitness, nutrición y comunidad para ayudar a las personas
 
 - The first mobile build is Expo/React Native so it can run in Expo Go and be published for iOS through the workspace.
 - Daily dashboard state uses AsyncStorage while the backend and external integrations remain opt-in for a later phase.
-- Payments are represented only as an informational membership screen; Apple Pay, in-app purchases and SINPE Móvil are not active.
+- RevenueCat is connected to the workspace, but store products and entitlements still need the owner's final membership configuration before real purchases are enabled.
 - Native device access is used for the food workflow through the camera and photo library permissions.
+- Food photo values are estimates and must be reviewed and corrected by the user before saving.
+- Creator-only administration, customer accounts, and membership permissions require the pending authentication/backend phase; local owner mode is only a preview.
 
 ## Product
 
@@ -48,7 +50,7 @@ The app includes Inicio, Rutinas, Comunidad, Progreso and Perfil in Spanish, plu
 ## Gotchas
 
 - The mobile workflow is `artifacts/bodyfit-dynasty: expo`; use the workflow rather than starting Expo manually.
-- Firebase, Apple Health, AI inference/video generation and the trainer admin panel still require a later integration phase.
+- Firebase, full Apple Health/HealthKit, production AI inference/video generation, AdMob IDs, and the trainer admin panel still require a later integration phase.
 
 ## Pointers
 
