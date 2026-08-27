@@ -15,9 +15,9 @@ const exercises = [
 
 export default function RoutinesScreen() {
   const colors = useColors();
-  const { workoutDone, toggleWorkout, canAccessFullTraining } = useBodyFit();
+  const { workoutDone, toggleWorkout, canAccessFullTraining, membershipLabel, catalogPercent } = useBodyFit();
   const [selectedDay, setSelectedDay] = useState('Hoy');
-  const visibleExercises = canAccessFullTraining ? exercises : exercises.slice(0, 1);
+  const visibleExercises = canAccessFullTraining ? exercises : exercises.slice(0, 2);
   return (
     <Screen>
       <TopBar title="Rutinas" subtitle="Tu plan, a tu ritmo" />
@@ -57,7 +57,7 @@ export default function RoutinesScreen() {
       {!canAccessFullTraining && selectedDay === 'Hoy' ? <Pressable onPress={() => undefined} style={{ marginBottom: 10 }}>
         <View style={{ backgroundColor: '#2A1A0B', borderRadius: 18, borderWidth: 1, borderColor: '#654A17', padding: 16, flexDirection: 'row', alignItems: 'center' }}>
           <Feather name="lock" size={17} color={colors.gold} />
-          <View style={{ flex: 1, marginLeft: 11 }}><Text style={{ color: colors.gold, fontWeight: '700', fontSize: 13 }}>3 ejercicios bloqueados</Text><Text style={{ color: '#C8BBA0', fontSize: 11, marginTop: 4 }}>Desbloquea el plan Premium para completar la rutina.</Text></View>
+        <View style={{ flex: 1, marginLeft: 11 }}><Text style={{ color: colors.gold, fontWeight: '700', fontSize: 13 }}>{exercises.length - visibleExercises.length} ejercicios bloqueados</Text><Text style={{ color: '#C8BBA0', fontSize: 11, marginTop: 4 }}>{membershipLabel} tiene {catalogPercent}% del catálogo. Actualiza tu membresía para desbloquear más.</Text></View>
           <Feather name="chevron-right" size={17} color={colors.gold} />
         </View>
       </Pressable> : null}
@@ -87,7 +87,7 @@ function GradientRoutineHeader({ colors }: { colors: ReturnType<typeof useColors
           <Text style={{ color: colors.foreground, fontSize: 16, fontWeight: '700' }}>Entrenamiento del día</Text>
           <Text style={{ color: colors.mutedForeground, fontSize: 11, marginTop: 4 }}>Intensidad media · 42 minutos</Text>
         </View>
-        <Text style={{ color: colors.gold, fontWeight: '700' }}>1/4</Text>
+        <Text style={{ color: colors.gold, fontWeight: '700' }}>{visibleExercises.length}/{exercises.length}</Text>
       </View>
     </View>
   );

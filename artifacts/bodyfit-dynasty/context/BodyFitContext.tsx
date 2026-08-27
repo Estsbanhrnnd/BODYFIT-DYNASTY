@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { getMembershipPlan, type MembershipId } from '@/constants/membership';
 
 export type DailyStats = {
   calories: number;
@@ -28,6 +29,9 @@ type BodyFitContextValue = {
   isOwner: boolean;
   previewClientFree: boolean;
   setPreviewClientFree: (value: boolean) => void;
+  membership: MembershipId;
+  membershipLabel: string;
+  catalogPercent: number;
   canUseFoodAI: boolean;
   canAccessFullTraining: boolean;
 };
@@ -89,6 +93,9 @@ export function BodyFitProvider({ children }: { children: React.ReactNode }) {
       isOwner: true,
       previewClientFree,
       setPreviewClientFree,
+      membership: previewClientFree ? 'standard' : 'golden',
+      membershipLabel: getMembershipPlan(previewClientFree ? 'standard' : 'golden').name,
+      catalogPercent: getMembershipPlan(previewClientFree ? 'standard' : 'golden').catalogPercent,
       canUseFoodAI: !previewClientFree,
       canAccessFullTraining: !previewClientFree,
     }),
