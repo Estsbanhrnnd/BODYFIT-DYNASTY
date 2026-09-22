@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useUser } from '@clerk/expo';
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { getMembershipPlan, type MembershipId } from '@/constants/membership';
 
@@ -56,6 +57,8 @@ const BodyFitContext = createContext<BodyFitContextValue | undefined>(undefined)
 const STORAGE_KEY = 'bodyfit-dynasty-daily-stats';
 
 export function BodyFitProvider({ children }: { children: React.ReactNode }) {
+  const { user } = useUser();
+  const isOwner = user?.publicMetadata?.role === 'owner';
   const [stats, setStats] = useState<DailyStats>(initialStats);
   const [hydrated, setHydrated] = useState(false);
   const [workoutDone, setWorkoutDone] = useState(false);
@@ -90,16 +93,16 @@ export function BodyFitProvider({ children }: { children: React.ReactNode }) {
       setSteps: (steps) => setStats((current) => ({ ...current, steps: Math.max(0, Math.round(steps)) })),
       toggleWorkout: () => setWorkoutDone((current) => !current),
       workoutDone,
-      isOwner: true,
+      isOwner,
       previewClientFree,
       setPreviewClientFree,
-      membership: previewClientFree ? 'standard' : 'golden',
-      membershipLabel: getMembershipPlan(previewClientFree ? 'standard' : 'golden').name,
-      catalogPercent: getMembershipPlan(previewClientFree ? 'standard' : 'golden').catalogPercent,
-      canUseFoodAI: !previewClientFree,
-      canAccessFullTraining: !previewClientFree,
+      membership: isOwner && !previewClientFree ? 'golden' : 'standard',
+      membershipLabel: getMembershipPlan(isOwner && !previewClientFree ? 'golden' : 'standard').name,
+      catalogPercent: getMembershipPlan(isOwner && !previewClientFree ? 'golden' : 'standard').catalogPercent,
+      canUseFoodAI: isOwner && !previewClientFree,
+      canAccessFullTraining: isOwner && !previewClientFree,
     }),
-    [hydrated, previewClientFree, stats, workoutDone],
+    [hydrated, isOwner, previewClientFree, stats, user?.id, workoutDone],
   );
 
   return <BodyFitContext.Provider value={value}>{children}</BodyFitContext.Provider>;

@@ -30,7 +30,7 @@ export default function RoutinesScreen() {
           ))}
         </View>
       </View>
-      <GradientRoutineHeader colors={colors} />
+      <GradientRoutineHeader colors={colors} visibleCount={visibleExercises.length} totalCount={exercises.length} />
       <SectionHeader title={selectedDay === 'Hoy' ? 'Pecho & Tríceps' : 'Entrenamientos recientes'} action="Editar" />
       {selectedDay === 'Hoy' ? visibleExercises.map((exercise) => (
         <Pressable key={exercise.name} onPress={() => undefined} style={({ pressed }) => [{ opacity: pressed ? 0.75 : 1, marginBottom: 10 }]}>
@@ -78,7 +78,15 @@ export default function RoutinesScreen() {
   );
 }
 
-function GradientRoutineHeader({ colors }: { colors: ReturnType<typeof useColors> }) {
+function GradientRoutineHeader({
+  colors,
+  visibleCount,
+  totalCount,
+}: {
+  colors: ReturnType<typeof useColors>;
+  visibleCount: number;
+  totalCount: number;
+}) {
   return (
     <View style={{ backgroundColor: '#171020', borderRadius: 20, padding: 18, marginTop: 16, borderWidth: 1, borderColor: '#44215E' }}>
       <View style={styles.row}>
@@ -87,7 +95,7 @@ function GradientRoutineHeader({ colors }: { colors: ReturnType<typeof useColors
           <Text style={{ color: colors.foreground, fontSize: 16, fontWeight: '700' }}>Entrenamiento del día</Text>
           <Text style={{ color: colors.mutedForeground, fontSize: 11, marginTop: 4 }}>Intensidad media · 42 minutos</Text>
         </View>
-        <Text style={{ color: colors.gold, fontWeight: '700' }}>{visibleExercises.length}/{exercises.length}</Text>
+        <Text style={{ color: colors.gold, fontWeight: '700' }}>{visibleCount}/{totalCount}</Text>
       </View>
     </View>
   );

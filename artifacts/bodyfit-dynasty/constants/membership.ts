@@ -7,7 +7,7 @@ export type MembershipPlan = {
   description: string;
   catalogPercent: number;
   features: string[];
-  icon: 'circle' | 'award' | 'diamond' | 'crown';
+  icon: 'circle' | 'award' | 'star';
   color: string;
 };
 
@@ -38,7 +38,7 @@ export const membershipPlans: MembershipPlan[] = [
     price: '₡14.590',
     description: 'Más entrenamiento, sin anuncios',
     catalogPercent: 50,
-    icon: 'diamond',
+    icon: 'star',
     color: '#2C1550',
     features: ['50% del catálogo de ejercicios', 'Análisis y escaneo de platos', 'Estimaciones de calorías y macros', '75 recetas iniciales', 'Sin anuncios'],
   },
@@ -48,7 +48,7 @@ export const membershipPlans: MembershipPlan[] = [
     price: '₡22.500',
     description: 'La experiencia completa BodyFit',
     catalogPercent: 100,
-    icon: 'crown',
+    icon: 'award',
     color: '#173C36',
     features: ['100% del catálogo de ejercicios', 'Plan alimenticio personalizado', '125 recetas y recetas de comunidad', 'Gym Scan, cardio y medallas', 'Chat 24/7 y comunidad Golden', 'Sin anuncios'],
   },
