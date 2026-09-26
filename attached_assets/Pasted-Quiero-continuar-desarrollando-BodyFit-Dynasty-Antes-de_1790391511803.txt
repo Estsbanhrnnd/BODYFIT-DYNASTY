@@ -1,0 +1,159 @@
+Quiero continuar desarrollando BodyFit Dynasty. Antes de agregar funciones nuevas, necesito que revises y corrijas el sistema actual de escaneo de alimentos porque actualmente la IA está identificando incorrectamente los alimentos y en ocasiones parece devolver siempre el mismo nombre o información nutricional aunque se escaneen comidas diferentes.
+
+IMPORTANTE: no quiero que reemplaces la integración actual de OpenAI sin revisar primero cómo está implementada.
+
+Primero analiza el flujo completo del escáner:
+
+1. Captura/subida de imagen.
+2. Envío de la imagen al backend.
+3. Llamada a OpenAI.
+4. Procesamiento de la respuesta.
+5. Conversión de la respuesta a alimento, gramos y macros.
+6. Guardado del resultado.
+7. Visualización en la app.
+
+Busca específicamente:
+
+* Datos hardcodeados.
+* Estados que no se estén limpiando entre escaneos.
+* Caché incorrecta.
+* Variables que estén conservando el alimento anterior.
+* IDs repetidos.
+* Respuestas de OpenAI que estén siendo interpretadas incorrectamente.
+* Prompts que estén provocando respuestas repetitivas.
+* Cualquier mock que todavía esté conectado al resultado final.
+* Problemas con el formato JSON de la respuesta.
+* Cualquier error que haga que una imagen nueva reutilice el resultado anterior.
+
+Cada escaneo debe procesarse como una solicitud independiente.
+
+La IA debe devolver únicamente los alimentos que realmente pueda identificar en la imagen y no inventar alimentos que no sean visibles. Si no puede identificar algo con suficiente confianza, debe indicarlo y permitir que el usuario lo corrija.
+
+El resultado de cada alimento debe tener una estructura consistente:
+
+* nombre
+* gramos_estimados
+* calorias
+* proteina
+* carbohidratos
+* grasas
+* fibra
+* nivel_de_confianza
+
+El usuario debe poder modificar los gramos antes de confirmar el registro.
+
+Además, quiero agregar un sistema de corrección manual:
+
+* Si el usuario considera que la identificación o los macros están incorrectos, debe poder seleccionar “Corregir”.
+* Podrá cambiar el nombre del alimento.
+* Podrá cambiar los gramos.
+* Podrá introducir manualmente calorías, proteína, carbohidratos, grasas y fibra si lo desea.
+* La corrección debe aplicarse únicamente a esa comida/registro.
+* NO debe modificar automáticamente el modelo de IA ni alterar la información base utilizada por futuros usuarios.
+* Debemos guardar la corrección como una modificación realizada por el usuario para poder auditarla posteriormente.
+
+NO avances todavía con las demás funciones hasta comprobar que el escáner funciona correctamente con imágenes diferentes.
+
+Cuando termines, haz pruebas con varias imágenes diferentes y confirma que cada una produce resultados independientes.
+
+Después de solucionar esto, quiero implementar las siguientes funciones en BodyFit Dynasty:
+
+1. PERFIL DE USUARIO
+    Al crear una cuenta/perfil, el usuario debe poder configurar:
+
+* Nombre.
+* Nombre de usuario único.
+* Foto de perfil.
+* Color de la aplicación.
+
+El usuario podrá escoger únicamente entre 10 colores básicos:
+rojo, naranja, amarillo, verde, azul, celeste, morado, rosado, negro y turquesa.
+
+El color elegido debe utilizarse como color de acento de su interfaz sin romper la legibilidad.
+
+2. CÓDIGO ÚNICO DE USUARIO
+    Cada usuario debe recibir automáticamente un código único de BodyFit Dynasty.
+
+Ejemplo:
+BF-8K42X7
+
+El código:
+
+* Debe ser único.
+* No debe cambiarse automáticamente.
+* Debe estar asociado permanentemente al usuario.
+* Debe poder verlo el propio usuario.
+* Debe poder verlo el administrador/dueño.
+* Debe permitir al administrador buscar rápidamente a un usuario.
+* No debe revelar información privada del usuario.
+
+3. MACROS
+    La aplicación debe continuar registrando todos los macros disponibles.
+
+Al configurar su perfil, el usuario podrá seleccionar cuáles considera sus macros prioritarios.
+
+Todos los macros seguirán almacenándose, pero los prioritarios tendrán mayor presencia visual en el dashboard.
+
+Por ejemplo:
+Proteína = prioridad 1
+Carbohidratos = prioridad 2
+Grasas = prioridad 3
+
+No quiero eliminar los demás macros simplemente porque el usuario no los haya seleccionado.
+
+4. SISTEMA DE MEDALLAS Y LOGROS
+    Quiero crear un sistema de medallas desbloqueables.
+
+Las medallas se obtendrán por logros como:
+
+* completar entrenamientos;
+* mantener constancia;
+* cumplir objetivos nutricionales;
+* registrar comidas;
+* alcanzar metas;
+* mantener determinadas rachas;
+* completar determinados retos.
+
+Las diferentes membresías de BodyFit Dynasty tendrán acceso a diferentes niveles o valores de medallas.
+
+Quiero que las medallas tengan una estética relacionada con el mundo del fitness, bodybuilding y atletas/influencers.
+
+IMPORTANTE:
+No quiero utilizar imágenes, nombres, firmas o representaciones que hagan creer que una persona real como Chris Bumstead o David Laid está oficialmente asociada, patrocinando o entregando las medallas si no existe autorización.
+
+Podemos utilizar nombres y diseños originales inspirados en conceptos del bodybuilding, por ejemplo:
+
+* Rookie
+* Iron
+* Titan
+* Elite
+* Dynasty
+* Legend
+
+y crear diferentes categorías visuales.
+
+5. ADMINISTRACIÓN
+    El administrador/dueño debe poder:
+
+* Buscar usuarios mediante su código único.
+* Ver perfil básico.
+* Ver membresía.
+* Ver logros/medallas.
+* Ver registros nutricionales necesarios para administrar el servicio.
+* Revisar las correcciones manuales hechas al escáner de alimentos.
+
+IMPORTANTE DE DESARROLLO:
+No quiero que estas nuevas funciones rompan las funciones existentes.
+
+Antes de modificar la base de datos:
+
+* revisa el esquema actual;
+* identifica qué tablas/modelos ya existen;
+* reutiliza estructuras existentes cuando sea correcto;
+* crea migraciones seguras;
+* no borres información existente;
+* no dupliques usuarios.
+
+Antes de implementar cada bloque importante, explícame brevemente qué archivos y estructuras vas a modificar y luego impleméntalo.
+
+Primero SOLUCIONA EL ESCÁNER DE ALIMENTOS. Después seguimos con perfiles, códigos, macros y medallas.
