@@ -20,12 +20,13 @@ RUN pnpm --filter @workspace/api-server run build
 FROM base AS runner
 ENV NODE_ENV=production
 ENV PORT=5000
-WORKDIR /app/artifacts/api-server
+WORKDIR /app
 
 COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/artifacts/api-server/dist ./dist
-COPY --from=builder /app/artifacts/api-server/package.json ./package.json
+COPY --from=builder /app/artifacts/api-server/dist ./artifacts/api-server/dist
+COPY --from=builder /app/artifacts/api-server/package.json ./artifacts/api-server/package.json
 
+WORKDIR /app/artifacts/api-server
 EXPOSE 5000
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
