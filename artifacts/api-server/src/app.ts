@@ -6,6 +6,7 @@ import { clerkMiddleware } from "@clerk/express";
 import pinoHttp from "pino-http";
 import router from "./routes";
 import { logger } from "./lib/logger";
+import { privacyHtml, termsHtml } from "./pages/legal";
 
 const app: Express = express();
 
@@ -81,6 +82,14 @@ if (process.env.CLERK_SECRET_KEY) {
 app.use(cors());
 app.use(express.json({ limit: "12mb" }));
 app.use(express.urlencoded({ extended: true }));
+
+app.get("/privacy", (_req, res) => {
+  res.type("html").send(privacyHtml);
+});
+
+app.get("/terms", (_req, res) => {
+  res.type("html").send(termsHtml);
+});
 
 app.use("/api", router);
 
