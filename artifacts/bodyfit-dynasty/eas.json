@@ -10,6 +10,10 @@
     },
     "preview": {
       "distribution": "internal",
+      "env": {
+        "EXPO_PUBLIC_DOMAIN": "bodyfit-api-production.up.railway.app",
+        "EXPO_PUBLIC_DEV_MODE": "true"
+      },
       "android": {
         "buildType": "apk"
       },
@@ -19,6 +23,9 @@
     },
     "production": {
       "autoIncrement": true,
+      "env": {
+        "EXPO_PUBLIC_DOMAIN": "bodyfit-api-production.up.railway.app"
+      },
       "android": {
         "buildType": "app-bundle"
       },
