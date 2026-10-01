@@ -5,7 +5,9 @@ import { Feather } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
 import { isLiquidGlassAvailable } from 'expo-glass-effect';
 import { Tabs } from 'expo-router';
-import { Icon, Label, NativeTabs } from 'expo-router/unstable-native-tabs';
+import { NativeTabs } from 'expo-router/unstable-native-tabs';
+const Icon = NativeTabs.Trigger.Icon;
+const Label = NativeTabs.Trigger.Label;
 import { SymbolView } from 'expo-symbols';
 
 // IMPORTANT: iOS 26 uses NativeTabs for native tabs with liquid glass support.
@@ -21,19 +23,19 @@ function NativeTabLayout() {
       </NativeTabs.Trigger>
       <NativeTabs.Trigger name="routines">
         <Icon sf={{ default: 'dumbbell', selected: 'dumbbell.fill' }} />
-        <Label>Rutinas</Label>
+        <Label>Entreno</Label>
       </NativeTabs.Trigger>
       <NativeTabs.Trigger name="community">
         <Icon sf={{ default: 'person.2', selected: 'person.2.fill' }} />
         <Label>Comunidad</Label>
       </NativeTabs.Trigger>
-      <NativeTabs.Trigger name="progress">
-        <Icon sf={{ default: 'chart.line.uptrend.xyaxis', selected: 'chart.line.uptrend.xyaxis' }} />
-        <Label>Progreso</Label>
+      <NativeTabs.Trigger name="recipes">
+        <Icon sf={{ default: 'book.closed', selected: 'book.closed.fill' }} />
+        <Label>Recetas</Label>
       </NativeTabs.Trigger>
-      <NativeTabs.Trigger name="profile">
-        <Icon sf={{ default: 'person.circle', selected: 'person.circle.fill' }} />
-        <Label>Perfil</Label>
+      <NativeTabs.Trigger name="store">
+        <Icon sf={{ default: 'bag', selected: 'bag.fill' }} />
+        <Label>Tienda</Label>
       </NativeTabs.Trigger>
     </NativeTabs>
   );
@@ -92,7 +94,7 @@ function ClassicTabLayout() {
       <Tabs.Screen
         name="routines"
         options={{
-          title: 'Rutinas',
+          title: 'Entreno',
           tabBarIcon: ({ color }) => isIOS ? <SymbolView name="dumbbell" tintColor={color} size={22} /> : <Feather name="activity" size={22} color={color} />,
         }}
       />
@@ -104,17 +106,17 @@ function ClassicTabLayout() {
         }}
       />
       <Tabs.Screen
-        name="progress"
+        name="recipes"
         options={{
-          title: 'Progreso',
-          tabBarIcon: ({ color }) => isIOS ? <SymbolView name="chart.line.uptrend.xyaxis" tintColor={color} size={22} /> : <Feather name="trending-up" size={22} color={color} />,
+          title: 'Recetas',
+          tabBarIcon: ({ color }) => isIOS ? <SymbolView name="book.closed" tintColor={color} size={22} /> : <Feather name="book-open" size={22} color={color} />,
         }}
       />
       <Tabs.Screen
-        name="profile"
+        name="store"
         options={{
-          title: 'Perfil',
-          tabBarIcon: ({ color }) => isIOS ? <SymbolView name="person.circle" tintColor={color} size={22} /> : <Feather name="user" size={22} color={color} />,
+          title: 'Tienda',
+          tabBarIcon: ({ color }) => isIOS ? <SymbolView name="bag" tintColor={color} size={22} /> : <Feather name="shopping-bag" size={22} color={color} />,
         }}
       />
     </Tabs>

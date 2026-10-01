@@ -118,9 +118,9 @@ globalThis.__dirname = __bannerPath.dirname(globalThis.__filename);
     `,
     },
   });
+  console.log("Build finished successfully");
 }
 
-buildAll().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+await buildAll();
+console.log("BUILD COMPLETED SUCCESSFULLY");
+

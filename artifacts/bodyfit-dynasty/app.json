@@ -2,6 +2,7 @@
   "expo": {
     "name": "BodyFit Dynasty",
     "slug": "bodyfit-dynasty",
+    "owner": "estebanhrnndzz",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -14,9 +15,27 @@
       "backgroundColor": "#08080B"
     },
     "ios": {
-      "supportsTablet": false
+      "supportsTablet": false,
+      "bundleIdentifier": "com.bodyfitdynasty.mobile",
+      "infoPlist": {
+        "NSCameraUsageDescription": "BodyFit Dynasty requiere acceso a la cámara para el escáner de alimentos por IA, lectura de códigos de barra e inspección de máquinas de gimnasio.",
+        "NSPhotoLibraryUsageDescription": "BodyFit Dynasty requiere acceso a tu galería para subir fotos de tus comidas, avatar y registrar tu evolución corporal.",
+        "NSPhotoLibraryAddUsageDescription": "Permite guardar tus reportes fotográficos de progreso y medallas en tu galería."
+      }
     },
-    "android": {},
+    "android": {
+      "package": "com.bodyfitdynasty.mobile",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/icon.png",
+        "backgroundColor": "#08080B"
+      },
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.READ_MEDIA_IMAGES",
+        "android.permission.POST_NOTIFICATIONS",
+        "android.permission.RECORD_AUDIO"
+      ]
+    },
     "web": {
       "favicon": "./assets/images/icon.png"
     },
@@ -27,12 +46,25 @@
           "origin": "https://replit.com/"
         }
       ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "BodyFit Dynasty requiere acceso a tu galería para fotos de comidas y evolución física.",
+          "cameraPermission": "BodyFit Dynasty requiere acceso a la cámara para el escáner de comidas por IA y máquinas de gimnasio."
+        }
+      ],
       "expo-font",
-      "expo-web-browser"
+      "expo-web-browser",
+      "expo-secure-store"
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "41b973aa-d78e-406b-936d-d81ac0d83c34"
+      }
     }
   }
 }

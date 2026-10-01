@@ -1,0 +1,30 @@
+import { boolean, jsonb, pgTable, text, timestamp, uniqueIndex } from "drizzle-orm/pg-core";
+
+export const profiles = pgTable(
+  "profiles",
+  {
+    userId: text("user_id").primaryKey(),
+    userCode: text("user_code").notNull(),
+    displayName: text("display_name").notNull().default(""),
+    username: text("username"),
+    avatarUrl: text("avatar_url"),
+    themeKey: text("theme_key").notNull().default("purple"),
+    fitnessGoal: text("fitness_goal"),
+    fitnessLevel: text("fitness_level"),
+    activities: jsonb("activities").$type<string[]>().notNull().default([]),
+    otherActivity: text("other_activity"),
+    trainingLocation: text("training_location"),
+    trainingPreferences: jsonb("training_preferences").$type<string[]>().notNull().default([]),
+    preferredMacros: jsonb("preferred_macros").$type<string[]>().notNull().default(["protein"]),
+    logoKey: text("logo_key").notNull().default("default"),
+    heightCm: text("height_cm").default("178"),
+    weightKg: text("weight_kg").default("78"),
+    age: text("age").default("26"),
+    membershipTier: text("membership_tier").default("free"),
+    membershipExpiresAt: timestamp("membership_expires_at", { withTimezone: true }),
+    onboardingComplete: boolean("onboarding_complete").notNull().default(false),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (table) => [uniqueIndex("profiles_user_code_unique").on(table.userCode), uniqueIndex("profiles_username_unique").on(table.username)],
+);

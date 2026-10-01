@@ -1,4 +1,11 @@
-export type MembershipId = 'standard' | 'bronze' | 'platinum' | 'golden';
+import {
+  MEMBERSHIP_CONFIG,
+  getMembershipConfig,
+  hasTierAccess,
+  type MembershipTierId,
+} from './membershipConfig';
+
+export type MembershipId = MembershipTierId;
 
 export type MembershipPlan = {
   id: MembershipId;
@@ -15,43 +22,48 @@ export const membershipPlans: MembershipPlan[] = [
   {
     id: 'standard',
     name: 'STANDARD',
-    price: 'Gratis · ₡0',
-    description: 'Empieza a construir el hábito',
-    catalogPercent: 5,
+    price: MEMBERSHIP_CONFIG.standard.priceFormatted,
+    description: MEMBERSHIP_CONFIG.standard.description,
+    catalogPercent: MEMBERSHIP_CONFIG.standard.catalogPercentTarget,
     icon: 'circle',
-    color: '#5A3B18',
-    features: ['5% inicial del catálogo', 'Aproximadamente 2 ejercicios por grupo', 'Conteo de pasos y streaks', '3 recetas gratuitas de muestra'],
+    color: '#3A2B1E',
+    features: MEMBERSHIP_CONFIG.standard.features,
   },
   {
     id: 'bronze',
     name: 'BRONZE',
-    price: '₡5.500',
-    description: 'Nutrición diaria para avanzar',
-    catalogPercent: 25,
+    price: MEMBERSHIP_CONFIG.bronze.priceFormatted,
+    description: MEMBERSHIP_CONFIG.bronze.description,
+    catalogPercent: MEMBERSHIP_CONFIG.bronze.catalogPercentTarget,
     icon: 'award',
-    color: '#7A4321',
-    features: ['25% del catálogo de ejercicios', '1 escaneo de comida por día', 'Calorías y macros estimados', '25 recetas iniciales'],
+    color: '#4A2A14',
+    features: MEMBERSHIP_CONFIG.bronze.features,
   },
   {
     id: 'platinum',
     name: 'PLATINUM',
-    price: '₡14.590',
-    description: 'Más entrenamiento, sin anuncios',
-    catalogPercent: 50,
+    price: MEMBERSHIP_CONFIG.platinum.priceFormatted,
+    description: MEMBERSHIP_CONFIG.platinum.description,
+    catalogPercent: MEMBERSHIP_CONFIG.platinum.catalogPercentTarget,
     icon: 'star',
-    color: '#2C1550',
-    features: ['50% del catálogo de ejercicios', 'Análisis y escaneo de platos', 'Estimaciones de calorías y macros', '75 recetas iniciales', 'Sin anuncios'],
+    color: '#1A2942',
+    features: MEMBERSHIP_CONFIG.platinum.features,
   },
   {
     id: 'golden',
     name: 'GOLDEN',
-    price: '₡22.500',
-    description: 'La experiencia completa BodyFit',
-    catalogPercent: 100,
+    price: MEMBERSHIP_CONFIG.golden.priceFormatted,
+    description: MEMBERSHIP_CONFIG.golden.description,
+    catalogPercent: MEMBERSHIP_CONFIG.golden.catalogPercentTarget,
     icon: 'award',
-    color: '#173C36',
-    features: ['100% del catálogo de ejercicios', 'Plan alimenticio personalizado', '125 recetas y recetas de comunidad', 'Gym Scan, cardio y medallas', 'Chat 24/7 y comunidad Golden', 'Sin anuncios'],
+    color: '#3A2C10',
+    features: MEMBERSHIP_CONFIG.golden.features,
   },
 ];
 
-export const getMembershipPlan = (id: MembershipId) => membershipPlans.find((plan) => plan.id === id) ?? membershipPlans[0];
+export const getMembershipPlan = (id: MembershipId | string | undefined) => {
+  const normalized = (id?.toLowerCase() as MembershipId) || 'standard';
+  return membershipPlans.find((plan) => plan.id === normalized) ?? membershipPlans[0];
+};
+
+export { MEMBERSHIP_CONFIG, getMembershipConfig, hasTierAccess };

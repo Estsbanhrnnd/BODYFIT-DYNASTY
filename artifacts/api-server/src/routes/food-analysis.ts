@@ -22,14 +22,10 @@ const FOOD_NUMBER_KEYS = [
   "nivel_de_confianza",
 ] as const;
 
+import { getAuthenticatedUserId } from "../lib/auth";
+
 function getUserId(req: Parameters<typeof getAuth>[0]) {
-  const userId = getAuth(req).userId;
-  if (!userId) {
-    const error = new Error("UNAUTHORIZED");
-    error.name = "UnauthorizedError";
-    throw error;
-  }
-  return userId;
+  return getAuthenticatedUserId(req);
 }
 
 function parseImageData(value: unknown) {

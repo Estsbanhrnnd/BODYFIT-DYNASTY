@@ -4,7 +4,10 @@ import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import { ActivityIndicator, ImageSourcePropType, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { router } from 'expo-router';
+import { useBodyFit } from '@/context/BodyFitContext';
 import { useColors } from '@/hooks/useColors';
+import { getDynastyLogo } from '@/constants/logosCatalog';
 
 export const images = {
   logo: require('../assets/images/icon.png') as ImageSourcePropType,
@@ -12,11 +15,19 @@ export const images = {
   workout: require('../assets/images/bench-press.jpg') as ImageSourcePropType,
 };
 
-export function Screen({ children, scroll = true }: { children: React.ReactNode; scroll?: boolean }) {
+export function Screen({
+  children,
+  scroll = true,
+  noBottomPadding = false,
+}: {
+  children: React.ReactNode;
+  scroll?: boolean;
+  noBottomPadding?: boolean;
+}) {
   const colors = useColors();
   const insets = useSafeAreaInsets();
   const topPadding = Platform.OS === 'web' ? 67 : insets.top + 12;
-  const bottomPadding = Platform.OS === 'web' ? 34 : insets.bottom + 92;
+  const bottomPadding = noBottomPadding || !scroll ? 0 : Platform.OS === 'web' ? 34 : insets.bottom + 92;
   const content = (
     <View style={[styles.screen, { backgroundColor: colors.background, paddingTop: topPadding, paddingBottom: bottomPadding }]}>
       {children}
@@ -35,28 +46,170 @@ export function Screen({ children, scroll = true }: { children: React.ReactNode;
   );
 }
 
-export function TopBar({ title, subtitle, onPress }: { title: string; subtitle?: string; onPress?: () => void }) {
+export function TopBar({
+  title,
+  subtitle,
+  onPress,
+  showProfileBubble = true,
+  showBackButton = false,
+  onBack,
+  notificationCount = 0,
+}: {
+  title: string;
+  subtitle?: string;
+  onPress?: () => void;
+  showProfileBubble?: boolean;
+  showBackButton?: boolean;
+  onBack?: () => void;
+  notificationCount?: number;
+}) {
   const colors = useColors();
+  const bodyfit = useBodyFit();
+  const profile = bodyfit?.profile;
+  const isProfileScreen = title === 'Perfil';
+
+  const handleBack = () => {
+    if (onBack) {
+      onBack();
+    } else if (router.canGoBack()) {
+      router.back();
+    } else {
+      router.replace('/(tabs)' as never);
+    }
+  };
+
   return (
     <View style={styles.topBar}>
-      <View>
-        <Text style={[styles.eyebrow, { color: colors.gold }]}>BODYFIT DYNASTY</Text>
-        <Text style={[styles.pageTitle, { color: colors.foreground }]}>{title}</Text>
-        {subtitle ? <Text style={[styles.subtitle, { color: colors.mutedForeground }]}>{subtitle}</Text> : null}
+      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, flex: 1, minWidth: 0, paddingRight: 8 }}>
+        {showBackButton || isProfileScreen ? (
+          <Pressable
+            testID="topbar-back-button"
+            onPress={handleBack}
+            hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+            style={({ pressed }) => [
+              styles.iconButton,
+              {
+                backgroundColor: colors.card,
+                borderColor: colors.border,
+                opacity: pressed ? 0.7 : 1,
+                marginRight: 2,
+              },
+            ]}
+          >
+            <Feather name="arrow-left" size={20} color={colors.foreground} />
+          </Pressable>
+        ) : null}
+
+        <BrandMark size={44} />
+        <View style={{ flex: 1, minWidth: 0 }}>
+          <Text style={[styles.eyebrow, { color: colors.gold }]} numberOfLines={1}>BODYFIT DYNASTY</Text>
+          <Text style={[styles.pageTitle, { color: colors.foreground }]} numberOfLines={1}>{title}</Text>
+          {subtitle ? <Text style={[styles.subtitle, { color: colors.mutedForeground }]} numberOfLines={1}>{subtitle}</Text> : null}
+        </View>
       </View>
-      <Pressable testID="notifications-button" onPress={onPress} style={({ pressed }) => [styles.iconButton, { backgroundColor: colors.card, borderColor: colors.border, opacity: pressed ? 0.7 : 1 }]}>
-        <Feather name="bell" size={18} color={colors.foreground} />
-        <View style={[styles.notificationDot, { backgroundColor: colors.primary }]} />
-      </Pressable>
+
+      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+        {onPress ? (
+          <Pressable
+            testID="notifications-button"
+            onPress={onPress}
+            style={({ pressed }) => [
+              styles.iconButton,
+              {
+                backgroundColor: '#1E1428',
+                borderColor: `${colors.gold}60`,
+                opacity: pressed ? 0.7 : 1,
+              },
+            ]}
+          >
+            <Feather name="bell" size={18} color={colors.gold} />
+            {notificationCount > 0 ? (
+              <View style={[styles.notificationBadge, { backgroundColor: colors.destructive }]}>
+                <Text style={styles.notificationBadgeText}>{notificationCount > 9 ? '9+' : notificationCount}</Text>
+              </View>
+            ) : null}
+          </Pressable>
+        ) : null}
+
+        {showProfileBubble && !isProfileScreen ? (
+          <Pressable
+            testID="profile-corner-bubble"
+            accessibilityRole="button"
+            accessibilityLabel="Abrir perfil de usuario"
+            hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+            onPress={() => {
+              try {
+                router.navigate('/profile' as never);
+              } catch {
+                router.push('/profile' as never);
+              }
+            }}
+            style={({ pressed }) => [
+              styles.profileBubble,
+              {
+                borderColor: colors.gold,
+                opacity: pressed ? 0.75 : 1,
+                zIndex: 9999,
+                elevation: 12,
+              },
+            ]}
+          >
+            {profile?.avatarUrl ? (
+              <Image
+                pointerEvents="none"
+                source={{ uri: profile.avatarUrl }}
+                style={{ width: 40, height: 40, borderRadius: 20 }}
+                contentFit="cover"
+              />
+            ) : (
+              <View
+                pointerEvents="none"
+                style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: `${colors.primary}33`, alignItems: 'center', justifyContent: 'center' }}
+              >
+                <Feather name="user" size={19} color={colors.gold} />
+              </View>
+            )}
+            <View pointerEvents="none" style={[styles.profileBubbleDot, { backgroundColor: '#10B981' }]} />
+          </Pressable>
+        ) : !onPress ? (
+          <View style={{ width: 44 }} />
+        ) : null}
+      </View>
     </View>
   );
 }
 
 export function BrandMark({ size = 48 }: { size?: number }) {
   const colors = useColors();
+  const { profile } = useBodyFit();
+  const activeLogo = getDynastyLogo(profile?.logoKey);
+
   return (
-    <View style={[styles.brandMark, { width: size, height: size, borderColor: colors.gold, backgroundColor: colors.card }]}>
-      <Image source={images.logo} contentFit="cover" style={{ width: size - 6, height: size - 6, borderRadius: 14 }} />
+    <View
+      style={[
+        styles.brandMark,
+        {
+          width: size,
+          height: size,
+          borderColor: activeLogo.primaryColor,
+          backgroundColor: activeLogo.bgColor,
+          shadowColor: activeLogo.primaryColor,
+          shadowOffset: { width: 0, height: 2 },
+          shadowOpacity: 0.35,
+          shadowRadius: 6,
+          elevation: 4,
+        },
+      ]}
+    >
+      <Image
+        source={images.logo}
+        contentFit="cover"
+        style={{
+          width: size - 6,
+          height: size - 6,
+          borderRadius: Math.max(8, Math.round(size * 0.28)),
+        }}
+      />
     </View>
   );
 }
@@ -75,12 +228,12 @@ export function SectionHeader({ title, action, onPress }: { title: string; actio
   );
 }
 
-export function MetricCard({ icon, label, value, goal, color }: { icon: keyof typeof Feather.glyphMap; label: string; value: string; goal?: string; color: string }) {
+export function MetricCard({ icon, customIcon, label, value, goal, color }: { icon?: keyof typeof Feather.glyphMap; customIcon?: React.ReactNode; label: string; value: string; goal?: string; color: string }) {
   const colors = useColors();
   return (
     <View style={[styles.metricCard, { backgroundColor: colors.card, borderColor: colors.border }]}>
       <View style={[styles.metricIcon, { backgroundColor: `${color}22` }]}>
-        <Feather name={icon} size={16} color={color} />
+        {customIcon ? customIcon : icon ? <Feather name={icon} size={16} color={color} /> : null}
       </View>
       <Text style={[styles.metricLabel, { color: colors.mutedForeground }]}>{label}</Text>
       <Text style={[styles.metricValue, { color: colors.foreground }]}>{value}</Text>
@@ -132,7 +285,7 @@ export function LoadingState() {
 
 export const styles = StyleSheet.create({
   screen: { flex: 1, paddingHorizontal: 20 },
-  topBar: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 26 },
+  topBar: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 26, zIndex: 999 },
   eyebrow: { fontSize: 10, fontWeight: '700', letterSpacing: 2.2, marginBottom: 7 },
   pageTitle: { fontSize: 28, fontWeight: '700', letterSpacing: -0.7 },
   subtitle: { fontSize: 13, marginTop: 5 },
@@ -161,7 +314,45 @@ export const styles = StyleSheet.create({
   spaceBetween: { justifyContent: 'space-between' },
   card: { borderRadius: 18, borderWidth: 1, padding: 16 },
   smallText: { fontSize: 12 },
-  mutedText: { fontSize: 12 },
   avatar: { width: 38, height: 38, borderRadius: 19 },
   avatarSmall: { width: 32, height: 32, borderRadius: 16 },
+  profileBubble: {
+    width: 46,
+    height: 46,
+    borderRadius: 23,
+    borderWidth: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'relative',
+    backgroundColor: '#1E1428',
+    zIndex: 9999,
+  },
+  profileBubbleDot: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    position: 'absolute',
+    bottom: -1,
+    right: -1,
+    borderWidth: 1.5,
+    borderColor: '#0D0814',
+  },
+  notificationBadge: {
+    position: 'absolute',
+    top: -4,
+    right: -4,
+    minWidth: 18,
+    height: 18,
+    borderRadius: 9,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 4,
+    borderWidth: 1.5,
+    borderColor: '#0B0710',
+  },
+  notificationBadgeText: {
+    color: '#FFFFFF',
+    fontSize: 9.5,
+    fontWeight: '800',
+  },
 });

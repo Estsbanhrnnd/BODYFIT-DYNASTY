@@ -16,14 +16,23 @@ function getApiKey() {
 }
 
 export function initializeRevenueCat() {
+  if (Platform.OS === 'web' || Constants.executionEnvironment === 'storeClient') {
+    return false;
+  }
   const apiKey = getApiKey();
   if (!apiKey) return false;
-  Purchases.configure({ apiKey });
-  return true;
+  try {
+    Purchases.configure({ apiKey });
+    return true;
+  } catch (e) {
+    console.warn('[RevenueCat] Failed to configure Purchases:', e);
+    return false;
+  }
 }
 
 function useSubscriptionContext() {
-  const configured = Boolean(getApiKey());
+  const isExpoGoOrWeb = Platform.OS === 'web' || Constants.executionEnvironment === 'storeClient';
+  const configured = !isExpoGoOrWeb && Boolean(getApiKey());
   const customerInfoQuery = useQuery({
     queryKey: ['revenuecat', 'customer-info'],
     queryFn: () => Purchases.getCustomerInfo(),

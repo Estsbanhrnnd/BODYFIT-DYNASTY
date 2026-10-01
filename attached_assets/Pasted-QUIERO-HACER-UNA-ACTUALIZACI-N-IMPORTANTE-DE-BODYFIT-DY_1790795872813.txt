@@ -1,0 +1,621 @@
+QUIERO HACER UNA ACTUALIZACIÓN IMPORTANTE DE BODYFIT DYNASTY ®.
+
+IMPORTANTE:
+Antes de modificar cualquier cosa, analiza cuidadosamente el proyecto actual y conserva todas las funciones que ya existen y funcionan correctamente.
+
+NO reconstruyas la aplicación desde cero.
+NO elimines funciones existentes.
+NO cambies las membresías, precios, ejercicios, navegación o lógica existente salvo cuando este pedido indique explícitamente una modificación.
+
+Quiero que implementes estas mejoras manteniendo el diseño actual de BodyFit Dynasty ® y haciendo que todo se vea integrado, profesional, moderno y consistente con la identidad visual de la aplicación.
+
+==================================================
+1. PERSONALIZACIÓN DE COLORES
+==================================================
+
+Crear un sistema de personalización de colores de la aplicación.
+
+Quiero ofrecer exactamente 10 colores/temas básicos predeterminados.
+
+Ejemplos:
+- Rojo
+- Amarillo
+- Rosado
+- Morado
+- Verde
+- Azul
+- Naranja
+- Celeste
+- Negro
+- Otro tono compatible con el diseño actual
+
+Los colores deben cambiar los elementos principales de la interfaz sin romper la legibilidad.
+
+El usuario debe poder seleccionar su color durante la configuración inicial del perfil y posteriormente poder cambiarlo desde configuración.
+
+El diseño general, tipografía y estructura de BodyFit Dynasty deben mantenerse.
+
+==================================================
+2. CONFIGURACIÓN INICIAL DEL PERFIL
+==================================================
+
+Cuando una persona cree su perfil por primera vez, crear una experiencia de configuración inicial moderna, similar a una configuración de perfil de una aplicación premium.
+
+Solicitar:
+
+- Nombre
+- Nombre de usuario
+- Foto de perfil
+- Color preferido de la aplicación
+- Objetivo fitness
+- Nivel actual
+- Actividades/deportes que practica
+- Preferencias relacionadas con entrenamiento
+
+El usuario debe poder modificar posteriormente esta información desde su perfil.
+
+==================================================
+3. CÓDIGO ÚNICO DE CADA USUARIO
+==================================================
+
+Cada usuario debe recibir automáticamente un código único.
+
+Ese código debe:
+
+- Ser diferente para cada usuario.
+- Identificar únicamente a ese usuario.
+- Ser visible para el propio usuario.
+- Ser visible para el administrador/dueño.
+- Facilitar la búsqueda de usuarios desde el panel administrativo.
+
+Crear la estructura necesaria para poder buscar usuarios utilizando ese código.
+
+No utilizar el nombre como identificador principal.
+
+==================================================
+4. PREFERENCIAS DE MACRONUTRIENTES
+==================================================
+
+Quiero que la aplicación permita registrar todos los principales macronutrientes.
+
+Como mínimo:
+
+- Proteína
+- Carbohidratos
+- Grasas
+
+Si existen otros valores nutricionales relevantes en la aplicación, conservarlos.
+
+Durante la configuración inicial, permitir que el usuario indique cuáles considera sus macros principales.
+
+IMPORTANTE:
+Esto no significa dejar de registrar los demás macros.
+
+La aplicación debe continuar almacenando todos los datos disponibles, pero puede destacar visualmente los macros que el usuario haya seleccionado como prioritarios.
+
+==================================================
+5. NIVEL FITNESS INICIAL
+==================================================
+
+Durante el registro inicial preguntar cuál es el nivel actual del usuario.
+
+Crear aproximadamente 5 niveles claros, por ejemplo:
+
+1. Principiante
+2. Inicial
+3. Amateur
+4. Avanzado
+5. Pro
+
+Los nombres pueden ajustarse si existe una mejor forma de representarlos dentro de la aplicación.
+
+La respuesta debe utilizarse posteriormente para personalizar recomendaciones.
+
+==================================================
+6. HISTORIAL DE ACTIVIDAD FÍSICA Y DEPORTES
+==================================================
+
+Durante el registro inicial preguntar qué actividades físicas o deportes ha practicado el usuario.
+
+Incluir varias opciones, por ejemplo:
+
+- Gimnasio
+- Musculación
+- Calistenia
+- Fútbol
+- Baloncesto
+- Ciclismo
+- Running
+- Natación
+- Yoga
+- Pilates
+- Gimnasia
+- CrossFit
+- Atletismo
+- Artes marciales
+- Boxeo
+- Tenis
+- Volleyball
+- Senderismo
+- Danza
+- Otro
+
+Permitir seleccionar varias opciones.
+
+Si selecciona "Otro", permitir escribir cuál.
+
+Esta información debe guardarse en el perfil y utilizarse posteriormente para personalización.
+
+==================================================
+7. SUGERENCIA DE RUTINA INICIAL
+==================================================
+
+Quiero que, después de completar el perfil inicial, la aplicación pueda mostrar una sugerencia de rutina inicial basada en:
+
+- Nivel del usuario.
+- Objetivo.
+- Actividades/deportes practicados.
+- Experiencia previa.
+- Si entrenará en gimnasio o en casa.
+- Información disponible del perfil.
+
+Debe existir una diferencia clara entre:
+
+ENTRENAMIENTO EN GIMNASIO
+
+y
+
+ENTRENAMIENTO EN CASA.
+
+La aplicación debe utilizar el catálogo de ejercicios existente de BodyFit Dynasty.
+
+Quiero que existan suficientes ejercicios y variantes para poder generar rutinas realmente adaptables.
+
+IMPORTANTE:
+La rutina sugerida inicialmente NO debe sustituir mi criterio como entrenador.
+
+Debe mostrarse como:
+
+"Sugerencia inicial"
+
+y dejar claro que puede ser revisada/modificada/aprobada por el entrenador.
+
+No eliminar el sistema actual de rutinas.
+
+==================================================
+8. SISTEMA DE MEDALLAS Y LOGROS
+==================================================
+
+Agregar un sistema de medallas/logros.
+
+Las medallas deben estar disponibles para usuarios de todas las membresías, pero pueden tener diferentes niveles de dificultad, rareza o valor.
+
+Ejemplos de logros:
+
+- Primer entrenamiento
+- Primera semana completada
+- 7 días consecutivos
+- 30 días consecutivos
+- Primer objetivo completado
+- Primer progreso registrado
+- Varias rutinas completadas
+- Varias recetas guardadas
+- Etc.
+
+Crear diferentes niveles de medallas según la dificultad.
+
+IMPORTANTE:
+Quiero una estética relacionada con el mundo del fitness y los reconocimientos de culturistas/influencers.
+
+Sin embargo, NO utilizar fotografías, nombres, logos o identidad de personas reales como David Laid, CBum u otros atletas sin autorización.
+
+En su lugar, crear diseños originales inspirados en el concepto de premios/reconocimientos fitness.
+
+==================================================
+9. FEED / COMUNIDAD TIPO INSTAGRAM
+==================================================
+
+Agregar una nueva sección de comunidad/feed.
+
+Quiero que funcione visualmente de forma similar a un feed moderno de redes sociales.
+
+Los usuarios podrán publicar:
+
+- Fotos de progreso
+- Progreso físico
+- Rutinas
+- Entrenamientos
+- Comidas
+- Recetas fitness
+- Otros contenidos relacionados con fitness
+
+Las publicaciones deben poder mostrar:
+
+- Foto/video cuando corresponda
+- Nombre de usuario
+- Foto de perfil
+- Descripción
+- Interacciones
+- Comentarios
+
+La idea es crear una comunidad fitness dentro de BodyFit Dynasty.
+
+El feed debe integrarse visualmente con el diseño actual.
+
+NO reemplazar las funciones actuales de la aplicación.
+
+Agregar esta sección como una nueva función.
+
+==================================================
+10. SECCIÓN EXCLUSIVA DE RECETAS
+==================================================
+
+Crear una sección independiente llamada:
+
+"Recetas"
+
+Debe estar separada del feed.
+
+El feed permite que los usuarios compartan sus propias recetas.
+
+La sección "Recetas" será el catálogo oficial de recetas de BodyFit Dynasty.
+
+Organizar las recetas por categorías:
+
+- Desayunos
+- Almuerzos
+- Cenas
+- Snacks
+- Postres
+- Otras categorías que sean útiles
+
+==================================================
+11. RECETAS SEGÚN MEMBRESÍA
+==================================================
+
+La sección de recetas debe respetar el sistema de membresías existente.
+
+La membresía FREE debe tener una cantidad limitada.
+
+Como base:
+
+FREE:
+
+- 2 desayunos
+- 2 almuerzos
+- 2 cenas
+- 2 snacks
+
+Las demás recetas deben aparecer visualmente bloqueadas.
+
+NO ocultar completamente el contenido bloqueado.
+
+Quiero que el usuario pueda ver que existen más recetas, pero que aparezcan bloqueadas según su membresía.
+
+Mostrar algo como:
+
+"Desbloquea con Bronze"
+
+"Desbloquea con Platinum"
+
+"Desbloquea con Golden"
+
+según corresponda.
+
+También quiero que algunas recetas adicionales para usuarios FREE puedan desbloquearse temporalmente mediante anuncios.
+
+Por ejemplo:
+
+"Ver anuncio para desbloquear"
+
+El usuario puede ver el anuncio y obtener acceso a esa receta según las reglas que implementemos.
+
+Los niveles superiores deben aumentar progresivamente la cantidad de recetas disponibles.
+
+Mantener la lógica de membresías existente.
+
+NO cambiar los precios actuales de las membresías.
+
+==================================================
+12. TIENDA
+==================================================
+
+Agregar una sección nueva llamada:
+
+"TIENDA"
+
+IMPORTANTE:
+
+La TIENDA debe estar dentro de las opciones principales de navegación inferior de la aplicación.
+
+Quiero que esté ubicada EN EL CENTRO de la barra de navegación inferior.
+
+Debe tener:
+
+- Ícono de tienda o carrito
+- Texto "Tienda"
+
+La tienda será independiente de las recetas.
+
+La tienda será para productos y suplementos deportivos.
+
+Crear inicialmente el catálogo visual de productos, pero:
+
+NO poner precios todavía.
+
+NO inventar precios.
+
+NO colocar precios temporales.
+
+Quiero que aparezcan productos como:
+
+- ISO 100 / proteína ISO
+- Whey Protein
+- Creatina
+- Aminoácidos
+- Pre-entreno
+- Otros suplementos deportivos
+
+Cada producto debe tener:
+
+- Imagen
+- Nombre
+- Descripción breve
+- Categoría
+- Espacio preparado para precio posteriormente
+
+La estructura debe quedar preparada para que posteriormente yo, como administrador/dueño, pueda:
+
+- Agregar productos
+- Eliminar productos
+- Modificar productos
+- Cambiar precios
+- Crear promociones
+- Activar/desactivar productos
+
+NO implementar precios todavía.
+
+NO inventar precios.
+
+==================================================
+13. FRASES MOTIVACIONALES DIARIAS
+==================================================
+
+Agregar frases motivacionales diarias.
+
+Mostrar una frase diferente o seleccionada para cada día.
+
+Debe integrarse visualmente con la pantalla de inicio.
+
+Crear una estructura que permita posteriormente ampliar/modificar la colección de frases.
+
+==================================================
+14. PROGRESO SEMANAL Y MENSUAL
+==================================================
+
+Crear una sección de progreso donde el usuario pueda visualizar:
+
+- Progreso semanal
+- Entrenamientos realizados
+- Actividad
+- Rachas
+- Datos relevantes disponibles
+
+También debe poder revisar meses anteriores.
+
+Crear historial mensual.
+
+El usuario debe poder navegar hacia atrás para revisar su progreso de meses anteriores.
+
+No eliminar los sistemas de pasos/rachas que ya existan.
+
+Integrar esta función con los datos existentes.
+
+==================================================
+15. PERSONALIZACIÓN DEL LOGO / ICONO
+==================================================
+
+Agregar una opción para personalizar el logo/icono visual de la aplicación.
+
+Yo posteriormente proporcionaré los logos que quiero utilizar.
+
+Crear una selección donde el usuario pueda elegir entre diferentes opciones de logo.
+
+La aplicación debe mantener el logo principal como opción predeterminada.
+
+El usuario podrá:
+
+- Elegir logo
+- Cambiar logo
+- Combinar la elección del logo con su color personalizado
+
+IMPORTANTE:
+
+Esto debe ser una personalización visual dentro de la experiencia del usuario.
+
+No eliminar el branding principal de BodyFit Dynasty.
+
+==================================================
+16. WIDGETS
+==================================================
+
+Preparar/agregar widgets para dispositivos compatibles.
+
+Principalmente:
+
+- iPhone
+- Apple Watch cuando técnicamente sea posible
+
+Los widgets pueden mostrar información como:
+
+- Pasos
+- Racha
+- Progreso
+- Entrenamiento
+- Motivación diaria
+- Datos relevantes de BodyFit Dynasty
+
+IMPORTANTE:
+
+Si alguna función requiere capacidades nativas de iOS/WatchOS que Expo/Replit no pueda implementar directamente, NO crear una simulación falsa.
+
+Indicar qué parte requiere configuración nativa adicional.
+
+==================================================
+17. APPLE HEALTH / ACTIVIDAD
+==================================================
+
+Quiero preparar la aplicación para integración con Apple Health / HealthKit.
+
+La idea es que BodyFit Dynasty pueda utilizar los datos de actividad física permitidos por el usuario.
+
+Cuando el usuario descargue la aplicación, debe poder solicitar los permisos correspondientes.
+
+Quiero explorar una función relacionada específicamente con actividad/gimnasio.
+
+IMPORTANTE:
+
+Respetar siempre los permisos y restricciones de Apple.
+
+No fingir que la integración está funcionando si todavía requiere configuración nativa.
+
+Si alguna parte no puede implementarse completamente desde Expo/Replit, dejar la arquitectura preparada y explicar qué configuración falta.
+
+==================================================
+18. DISEÑO Y EXPERIENCIA
+==================================================
+
+Todo debe sentirse como UNA SOLA aplicación.
+
+No quiero que las nuevas funciones parezcan aplicaciones separadas.
+
+Mantener:
+
+- Identidad visual BodyFit Dynasty
+- Diseño moderno
+- Estética fitness
+- Navegación consistente
+- Animaciones moderadas
+- Buena legibilidad
+- Experiencia premium
+
+No saturar la interfaz.
+
+La barra inferior debe reorganizarse cuidadosamente para que las nuevas secciones encajen sin hacerla confusa.
+
+Debe incluir especialmente:
+
+INICIO
+ENTRENAMIENTO
+FEED/COMUNIDAD
+TIENDA
+y las demás funciones existentes que ya tenga la aplicación, reorganizándolas de forma lógica.
+
+==================================================
+19. IMPORTANTE SOBRE LAS FUNCIONES EXISTENTES
+==================================================
+
+ANTES de modificar:
+
+1. Analiza la estructura actual.
+2. Identifica las pantallas existentes.
+3. Identifica la navegación existente.
+4. Identifica las membresías existentes.
+5. Identifica el catálogo de ejercicios.
+6. Identifica los datos de usuarios.
+7. Identifica las funciones de pasos y rachas.
+8. Identifica el sistema actual de recetas si ya existe.
+9. Identifica el sistema de administración existente.
+
+NO borrar información existente.
+
+NO reemplazar funciones existentes innecesariamente.
+
+NO cambiar precios actuales de membresías.
+
+NO eliminar el sistema actual de usuarios.
+
+NO eliminar el catálogo actual de ejercicios.
+
+NO eliminar funciones que ya funcionan.
+
+==================================================
+20. API DE IA — NO MODIFICAR POR AHORA
+==================================================
+
+IMPORTANTE:
+
+NO modificar todavía la implementación del análisis de comida mediante IA.
+
+NO agregar todavía una nueva API.
+
+NO cambiar API Keys.
+
+NO cambiar proveedores de IA.
+
+NO implementar todavía el sistema avanzado de análisis de macros.
+
+Esa parte será desarrollada posteriormente en una actualización independiente.
+
+Si existe código relacionado con el análisis de comida, conservarlo y no romperlo.
+
+==================================================
+21. SEGURIDAD Y DATOS
+==================================================
+
+No exponer claves privadas, API keys o secretos dentro de la aplicación cliente.
+
+Los datos de los usuarios deben mantenerse separados correctamente.
+
+El código único de usuario debe ser único.
+
+Las funciones administrativas deben estar protegidas y solamente disponibles para el administrador autorizado.
+
+==================================================
+22. IMPLEMENTACIÓN
+==================================================
+
+NO quiero que simplemente crees diseños visuales sin funcionalidad.
+
+Siempre que sea posible:
+
+- Crear los componentes reales.
+- Crear la navegación real.
+- Crear estructuras de datos reales.
+- Crear estados reales.
+- Crear lógica de membresías.
+- Crear lógica de desbloqueo.
+- Crear almacenamiento de preferencias.
+- Crear estructuras preparadas para administración.
+
+Si una función requiere backend, base de datos, permisos nativos o configuración externa que todavía no está disponible:
+
+1. No inventes que funciona.
+2. Implementa la parte que sí puede hacerse.
+3. Deja la arquitectura preparada.
+4. Indica exactamente qué falta para completarla.
+
+==================================================
+23. ANTES DE TERMINAR
+==================================================
+
+Después de implementar las modificaciones:
+
+- Comprueba que la aplicación inicia correctamente.
+- Comprueba que la navegación funciona.
+- Comprueba que las membresías existentes siguen funcionando.
+- Comprueba que no desaparecieron funciones existentes.
+- Comprueba que la tienda aparece en la navegación inferior.
+- Comprueba que las recetas respetan las restricciones por membresía.
+- Comprueba que los usuarios pueden configurar su perfil.
+- Comprueba que el código único de usuario funciona.
+- Comprueba que el feed funciona.
+- Comprueba que las preferencias de color se guardan.
+- Comprueba que el progreso semanal/mensual funciona.
+- Comprueba que no existen errores de compilación.
+
+Si encuentras errores, corrígelos antes de finalizar.
+
+NO cambies funcionalidades que no estén relacionadas con este pedido.
+
+El objetivo es mejorar la aplicación actual de BodyFit Dynasty ® sin destruir ni reemplazar lo que ya está funcionando.
