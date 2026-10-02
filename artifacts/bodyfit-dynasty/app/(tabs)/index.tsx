@@ -232,8 +232,8 @@ export default function DashboardScreen() {
     <Screen>
       <TopBar title={`Hola, ${name}`} subtitle={dateLabel} />
 
-      {/* Banner Principal de Racha y Estado (Interactivo: abre Actividad Mensual) con fondo de Atleta haciendo Cardio en la Calle */}
-      <Pressable onPress={() => setMonthlyActivityVisible(true)} style={{ marginTop: 2 }}>
+      {/* Banner Principal de Racha y Estado (Interactivo: abre Mi Progreso) con fondo de Atleta haciendo Cardio en la Calle */}
+      <Pressable onPress={() => router.push('/progress')} style={{ marginTop: 2 }}>
         <View
           style={{
             borderRadius: 22,
@@ -266,7 +266,7 @@ export default function DashboardScreen() {
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
                   <Text style={{ color: '#FFFFFF', fontSize: 13, fontWeight: '700' }}>Tu consistencia habla</Text>
                   <View style={{ backgroundColor: 'rgba(212, 175, 55, 0.25)', paddingHorizontal: 7, paddingVertical: 2, borderRadius: 6, borderWidth: 1, borderColor: '#D4AF3780' }}>
-                    <Text style={{ color: '#FFD700', fontSize: 9, fontWeight: '800' }}>ACTIVIDAD 📅</Text>
+                    <Text style={{ color: '#FFD700', fontSize: 9, fontWeight: '800' }}>MI PROGRESO 📈</Text>
                   </View>
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 4 }}>
@@ -276,7 +276,7 @@ export default function DashboardScreen() {
                   </Text>
                 </View>
                 <Text style={{ color: '#F3E8FF', fontSize: 11, marginTop: 4 }}>
-                  {stats.streak ? 'de racha activa BodyFit Dynasty' : 'Toca para ver actividad mensual o restablecer racha'}
+                  {stats.streak ? 'de racha activa BodyFit Dynasty · Toca para ver progreso' : 'Toca para ver tus estadísticas y progreso histórico'}
                 </Text>
                 <Text style={{ color: colors.gold, fontSize: 10, marginTop: 3, fontWeight: '600' }}>
                   Récord: {streakDetails.bestStreak || stats.streak} d · Salvadas: {streakDetails.savedStreaksCount}

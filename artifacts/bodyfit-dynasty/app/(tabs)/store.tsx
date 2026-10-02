@@ -10,32 +10,32 @@ import { useBodyFit } from '@/context/BodyFitContext';
 import { useColors } from '@/hooks/useColors';
 import { getProductSpecification } from '@/constants/storeCatalog';
 
-type StoreCategory = 'Todos' | 'Proteínas' | 'Creatinas' | 'Aminoácidos';
+type StoreCategory = 'Todos' | 'Proteínas' | 'Creatinas' | 'Aminoácidos' | 'Pre-Entrenos' | 'Multivitamínicos';
 
 const fallbackProducts = [
   // --- PROTEÍNAS ---
   {
     id: 'prod-iso100',
     name: 'Dymatize ISO 100 Hydrolyzed Whey',
-    description: '100% aislado de proteína de suero hidrolizada. 25g de proteína ultra pura, 5.5g de BCAAs y menos de 1g de azúcar y grasa por porción. Digestión y absorción inmediata.',
+    description: '100% aislado de proteína de suero hidrolizada con microfiltración de flujo cruzado. 25g de proteína, 5.5g de BCAAs y menos de 1g de grasa y azúcar por porción. Máxima absorción inmediata para desarrollo muscular magro.',
     category: 'Proteínas',
-    imageUrl: 'https://images.unsplash.com/photo-1579722821273-0f6c7d44362f?w=800&auto=format&fit=crop&q=80',
+    imageUrl: 'https://dymatize.imgix.net/production/products/dym0001-8_ISO100_20s_PDPHero_D_3840x2156_GourmetVanilla.jpg?w=800',
     priceCents: null,
     active: true,
   },
   {
     id: 'prod-gold-standard',
     name: 'Optimum Nutrition Gold Standard 100% Whey',
-    description: 'La proteína de mayor venta en Costa Rica y el mundo. 24g de aislado de suero de leche, 5.5g de BCAAs naturales y 4g de glutamina para máxima recuperación.',
+    description: 'La proteína más vendida del planeta. 24g de aislado y concentrado ultrafiltrado de suero, 5.5g de BCAAs naturales y 4g de glutamina. Solubilidad instantánea y textura premium para alimentar la síntesis de proteína.',
     category: 'Proteínas',
-    imageUrl: 'https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=800&auto=format&fit=crop&q=80',
+    imageUrl: 'https://www.optimumnutrition.com/cdn/shop/files/on-1154008_Image_01.png?width=800',
     priceCents: null,
     active: true,
   },
   {
     id: 'prod-nitro-tech',
     name: 'MuscleTech Nitro-Tech 100% Whey Gold',
-    description: 'Fórmula enriquecida con péptidos y aislado de suero con microfiltración extrema. 24g de proteína de valor biológico superior y excelente solubilidad.',
+    description: 'Péptidos de suero bioactivos de absorción rápida combinados con aislado de suero de máxima pureza. 24g de proteína de alto valor biológico y perfil enriquecido con BCAAs sin rellenos ni sustancias prohibidas.',
     category: 'Proteínas',
     imageUrl: 'https://www.muscletech.com/cdn/shop/files/mt-nitro-tech-100-whey-gold-french-vanilla-5lb_0a7fe571-2a38-4a63-b889-afc3dd6966bc.png?v=1753903525',
     priceCents: null,
@@ -44,7 +44,7 @@ const fallbackProducts = [
   {
     id: 'prod-cbum-whey',
     name: 'Raw Nutrition Whey Isolate (CBUM Series)',
-    description: 'Aislado de suero premium oficial del 5x Mr. Olympia Chris Bumstead. Microfiltrado en frío sin rellenos para máxima biodisponibilidad y definición muscular limpia.',
+    description: 'Aislado de suero 100% microfiltrado en frío de grado farmacéutico. 25g de proteína pura por porción sin grasas saturadas, bajo en sodio y con sabores legendarios como Itholate para definición y masa magra.',
     category: 'Proteínas',
     imageUrl: 'https://getrawnutrition.com/cdn/shop/files/BUM-Itholate-Chris_s_Secret_Whey_Blueberry_muffin_e931fece-6536-44bd-a62c-ed9ee5357932.png?v=1745899530',
     priceCents: null,
@@ -53,9 +53,9 @@ const fallbackProducts = [
   {
     id: 'prod-syntha-6',
     name: 'BSN Syntha-6 Ultra-Premium Protein Matrix',
-    description: 'Matriz proteica multifase con 22g de proteína de digestión rápida, media y lenta. Sabor excepcional tipo malteada para nutrir tus músculos durante varias horas.',
+    description: 'Matriz proteica multifase de 22g de proteína con 6 fuentes de liberación sostenida (rápida, media y lenta). Enriquecida con BCAAs, MCTs y ácidos grasos esenciales. Nutrición muscular continua durante varias horas.',
     category: 'Proteínas',
-    imageUrl: 'https://images.unsplash.com/photo-1579722822184-7a31f79a9ef1?w=800&auto=format&fit=crop&q=80',
+    imageUrl: 'https://www.gobsn.com/cdn/shop/files/S6_Blueberry_FR.png',
     priceCents: null,
     active: true,
   },
@@ -64,7 +64,7 @@ const fallbackProducts = [
   {
     id: 'prod-cbum-creatine',
     name: 'Raw Nutrition CBUM Thavage Creatine',
-    description: '100% monohidrato de creatina de la serie oficial de Chris Bumstead. 5g por porción pura sin sabor para incrementar fuerza explosiva, volumen celular y rendimiento.',
+    description: 'Monohidrato de creatina de máxima pureza micronizada de la línea oficial de Chris Bumstead. 5g por porción sin sabor ni rellenos para potenciar fuerza explosiva, volumen celular intracelular y resistencia anaeróbica.',
     category: 'Creatinas',
     imageUrl: 'https://getrawnutrition.com/cdn/shop/files/RAW_Signature_Creatine_plus_HMB_Sour_Blood_Orange_x_Sara_Saffari_Mockup.png?v=1788371412&width=800',
     priceCents: null,
@@ -72,37 +72,37 @@ const fallbackProducts = [
   },
   {
     id: 'prod-on-creatine',
-    name: 'Optimum Nutrition Micronized Creatine',
-    description: 'Monohidrato de creatina micronizado para disolución instantánea sin grumos. Probado científicamente para regenerar ATP y aumentar masa muscular magra.',
+    name: 'Optimum Nutrition Micronized Creatine Powder',
+    description: '5g de monohidrato de creatina micronizado para disolución ultra rápida sin sedimentación. Respaldado por estudios clínicos para aumentar el rendimiento en series pesadas y acelerar la recuperación muscular entre sets.',
     category: 'Creatinas',
-    imageUrl: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=800&auto=format&fit=crop&q=80',
+    imageUrl: 'https://www.optimumnutrition.com/cdn/shop/files/ON_DTC_PDP_Creatine60srv_6074352_4000x4000_8caf3a00-52f7-432d-857c-2cac79bb31a3.png?v=1784749814&width=800',
     priceCents: null,
     active: true,
   },
   {
     id: 'prod-universal-creapure',
     name: 'Universal Nutrition Creatina Creapure',
-    description: 'La creatina alemana Creapure® con 99.9% de pureza certificada. El estándar más alto en potencia, resistencia y seguridad para atletas exigentes.',
+    description: 'Fabricada en Alemania bajo los controles más rigurosos del mundo. Libre de impurezas como DCD y DHT. Máxima biodisponibilidad y potencia para atletas que exigen el estándar más limpio del mercado.',
     category: 'Creatinas',
-    imageUrl: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=800&auto=format&fit=crop&q=80',
+    imageUrl: 'https://www.animalpak.com/cdn/shop/files/Creatine_500g_Unflavored_1200x1200_96a0f2dc-3eaf-4be6-8a47-4e94d58c8f93.jpg?v=1762196608&width=800',
     priceCents: null,
     active: true,
   },
   {
     id: 'prod-platinum-creatine',
     name: 'MuscleTech Platinum 100% Creatine',
-    description: '5000 mg de creatina ultra-micronizada por porción testada por cromatografía HPLC. Máxima saturación intramuscular y recuperación acelerada.',
+    description: '5000mg de monohidrato de creatina ultra-micronizada por porción testada por cromatografía líquida HPLC. Favorece la voluminización muscular y maximiza la regeneración de fosfocreatina.',
     category: 'Creatinas',
-    imageUrl: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=800&auto=format&fit=crop&q=80',
+    imageUrl: 'https://www.muscletech.com/cdn/shop/files/mt-platinum-100-creatine-capsules.png',
     priceCents: null,
     active: true,
   },
   {
     id: 'prod-nutricost-creatine',
-    name: 'Nutricost Pure Creatine Monohydrate',
-    description: 'Creatina monohidratada pura sin aditivos, gluten ni rellenos. 500g con 100 porciones garantizadas para soporte continuo de fuerza y potencia.',
+    name: 'Nutricost Pure Creatine Monohydrate 500g',
+    description: '500 gramos de monohidrato de creatina pura sin aditivos, gluten ni organismos modificados genéticamente (Non-GMO). 100 servicios garantizados para soporte continuo de fuerza, potencia y rendimiento atlético.',
     category: 'Creatinas',
-    imageUrl: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=800&auto=format&fit=crop&q=80',
+    imageUrl: 'https://nutricost.com/cdn/shop/files/NTC_CreatineMonohydrate_Unflavored_500G_Front_SQUARE_98526928-e1cc-4ff6-9918-430654760159_1200x1200.jpg',
     priceCents: null,
     active: true,
   },
@@ -110,19 +110,77 @@ const fallbackProducts = [
   // --- AMINOÁCIDOS ---
   {
     id: 'prod-xtend-bcaa',
-    name: 'Scivation Xtend BCAA Original',
-    description: 'Líder número 1 en aminoácidos de cadena ramificada en Costa Rica. 7g de BCAAs en proporción 2:1:1, glutamina, citrulina y electrolitos para hidratación sin calorías.',
+    name: 'Scivation Xtend BCAA Original 7G',
+    description: '7g de BCAAs en la proporción clínicamente estudiada 2:1:1, combinados con 2.5g de L-Glutamina, 1g de Malato de Citrulina y una mezcla de electrolitos patentada para máxima hidratación intra-entrenamiento sin azúcar ni carbohidratos.',
     category: 'Aminoácidos',
-    imageUrl: 'https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?w=800&auto=format&fit=crop&q=80',
+    imageUrl: 'https://cellucor.com/cdn/shop/files/XTEND_1144_Digital_Relabel_FlowThrough_Assets_PDPs_OnGreyBackground-XTEND-OG30-BRI.png?v=1771552623&width=800',
     priceCents: null,
     active: true,
   },
   {
     id: 'prod-on-amino-energy',
     name: 'Optimum Nutrition Essential Amino Energy',
-    description: 'Energía limpia y aminoácidos esenciales con 100 mg de cafeína natural de té verde y café verde. Ideal antes o durante el entreno para enfoque y recuperación.',
+    description: '5g de aminoácidos micronizados de rápida absorción con 100mg de cafeína natural derivada de té verde y extracto de café verde. Energía sostenida, concentración mental y soporte muscular sin bajón calórico.',
     category: 'Aminoácidos',
-    imageUrl: 'https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?w=800&auto=format&fit=crop&q=80',
+    imageUrl: 'https://www.optimumnutrition.com/cdn/shop/files/on-1132800_Image_01.png?v=1755790971&width=800',
+    priceCents: null,
+    active: true,
+  },
+
+  // --- PRE-ENTRENOS ---
+  {
+    id: 'prod-c4-original',
+    name: 'Cellucor C4 Original Pre-Workout',
+    description: 'El pre-entreno número 1 en ventas de América. Formulado con 150mg de cafeína anhidra, 1.6g de CarnoSyn® Beta-Alanina para retrasar la fatiga muscular, 1g de Nitrato de Creatina NO3-T y Velvet Bean para motivación y bombeo muscular intenso.',
+    category: 'Pre-Entrenos',
+    imageUrl: 'https://cellucor.com/cdn/shop/files/C4AN_1002_Brand_C4YellowLabel_Transition_C4Original_CoreFlavors_BasicPDPs-OG-IBR-Hero-Grey.png?v=1773235672&width=800',
+    priceCents: null,
+    active: true,
+  },
+  {
+    id: 'prod-cbum-thavage-pre',
+    name: 'Raw Nutrition CBUM Thavage Pre-Workout',
+    description: 'Diseñado y calibrado personalmente por el 5x Mr. Olympia Chris Bumstead. Contiene 6g de L-Citrulina pura para vasodilatación extrema, 3.2g de Beta-Alanina, 2.5g de Betaína Anhidra, Alpha-GPC y 305mg de cafeína en matriz bifásica para concentración mental total.',
+    category: 'Pre-Entrenos',
+    imageUrl: 'https://getrawnutrition.com/cdn/shop/files/RAWSignatureThavagePreWorkout-CherryLimeSlush-WhiteBottle.png?v=1778770803&width=800',
+    priceCents: null,
+    active: true,
+  },
+  {
+    id: 'prod-pre-jym',
+    name: 'JYM Supplement Science Pre JYM High-Performance',
+    description: 'Fórmula todo en uno formulada por el Dr. Jim Stoppani. 6g de Malato de Citrulina (2:1), 6g de BCAAs, 2g de Creatina HCl, 2g de Beta-Alanina, 1.5g de Betaína, 500mg de extracto de raíz de remolacha y 300mg de cafeína sin mezclas patentadas ocultas.',
+    category: 'Pre-Entrenos',
+    imageUrl: 'https://jymsupplementscience.com/cdn/shop/files/PRE30BP300_25954_091724_V1.1-Front-1200px.png?v=1775425736&width=800',
+    priceCents: null,
+    active: true,
+  },
+
+  // --- MULTIVITAMÍNICOS ---
+  {
+    id: 'prod-opti-men',
+    name: 'Optimum Nutrition Opti-Men Multivitamin',
+    description: 'Potente multivitamínico diario con más de 75 ingredientes activos distribuidos en 4 mezclas especializadas: Amino-Men Blend (8 aminoácidos clave), Phyto-Men Blend (concentrados botánicos y frutas), Viri-Men Blend y Enzy-Men Blend para digestión y vitalidad masculina.',
+    category: 'Multivitamínicos',
+    imageUrl: 'https://www.optimumnutrition.com/cdn/shop/files/ON_OptiMen_90ct_6074229.png?v=1779369013&width=800',
+    priceCents: null,
+    active: true,
+  },
+  {
+    id: 'prod-opti-women',
+    name: 'Optimum Nutrition Opti-Women Multivitamin',
+    description: 'Diseñado específicamente para el metabolismo y las demandas físicas de la mujer activa. 40 ingredientes activos, 23 vitaminas y minerales esenciales, 150mg de calcio para salud ósea, 18mg de hierro quelado, ácido fólico y extractos botánicos antioxidantes en cápsulas Vcaps.',
+    category: 'Multivitamínicos',
+    imageUrl: 'https://www.optimumnutrition.com/cdn/shop/files/ON_OptiWomen_60ct_Main_Image.png?v=1777474313&width=800',
+    priceCents: null,
+    active: true,
+  },
+  {
+    id: 'prod-animal-pak',
+    name: 'Universal Nutrition Animal Pak The Complete Multi-Pack',
+    description: 'Desde 1983, el suplemento base de los atletas de fuerza más exigentes del mundo. Cada pack individual aporta megadosis de vitaminas y minerales, complejo de aminoácidos, complejo de optimización de rendimiento, enzimas digestivas y complejo hepático protector.',
+    category: 'Multivitamínicos',
+    imageUrl: 'https://www.animalpak.com/cdn/shop/files/Pak_30packs_1200x1200_10ffb784-bf66-40fb-818d-0343c89d36c3.webp?v=1778247781&width=800',
     priceCents: null,
     active: true,
   },
@@ -198,7 +256,7 @@ export default function StoreScreen() {
       {/* Selector de Categorías */}
       <View style={{ paddingVertical: 8 }}>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8, paddingHorizontal: 2 }}>
-          {(['Todos', 'Proteínas', 'Creatinas', 'Aminoácidos'] as const).map((cat) => {
+          {(['Todos', 'Proteínas', 'Creatinas', 'Aminoácidos', 'Pre-Entrenos', 'Multivitamínicos'] as const).map((cat) => {
             const active = selectedCategory === cat;
             return (
               <Pressable
@@ -516,6 +574,41 @@ export default function StoreScreen() {
                           {spec.servingInfo.glutamine ? (
                             <Text style={{ color: colors.foreground, fontSize: 11.5 }}>
                               • Glutamina: <Text style={{ fontWeight: '700' }}>{spec.servingInfo.glutamine}</Text>
+                            </Text>
+                          ) : null}
+                          {spec.servingInfo.creatine ? (
+                            <Text style={{ color: colors.foreground, fontSize: 11.5 }}>
+                              • Creatina Pura: <Text style={{ color: colors.gold, fontWeight: '700' }}>{spec.servingInfo.creatine}</Text>
+                            </Text>
+                          ) : null}
+                          {spec.servingInfo.caffeine ? (
+                            <Text style={{ color: colors.foreground, fontSize: 11.5 }}>
+                              • Cafeína / Energía: <Text style={{ color: '#FF7700', fontWeight: '700' }}>{spec.servingInfo.caffeine}</Text>
+                            </Text>
+                          ) : null}
+                          {spec.servingInfo.citrulline ? (
+                            <Text style={{ color: colors.foreground, fontSize: 11.5 }}>
+                              • Citrulina / Bombeo: <Text style={{ color: colors.primary, fontWeight: '700' }}>{spec.servingInfo.citrulline}</Text>
+                            </Text>
+                          ) : null}
+                          {spec.servingInfo.betaAlanine ? (
+                            <Text style={{ color: colors.foreground, fontSize: 11.5 }}>
+                              • Beta-Alanina: <Text style={{ fontWeight: '700' }}>{spec.servingInfo.betaAlanine}</Text>
+                            </Text>
+                          ) : null}
+                          {spec.servingInfo.vitamins ? (
+                            <Text style={{ color: colors.foreground, fontSize: 11.5 }}>
+                              • Vitaminas Clave: <Text style={{ color: colors.gold, fontWeight: '700' }}>{spec.servingInfo.vitamins}</Text>
+                            </Text>
+                          ) : null}
+                          {spec.servingInfo.minerals ? (
+                            <Text style={{ color: colors.foreground, fontSize: 11.5 }}>
+                              • Minerales Esenciales: <Text style={{ fontWeight: '700' }}>{spec.servingInfo.minerals}</Text>
+                            </Text>
+                          ) : null}
+                          {spec.servingInfo.keyActives ? (
+                            <Text style={{ color: colors.foreground, fontSize: 11.5 }}>
+                              • Complejos Activos: <Text style={{ color: colors.primary, fontWeight: '700' }}>{spec.servingInfo.keyActives}</Text>
                             </Text>
                           ) : null}
                           {spec.servingInfo.sugar ? (

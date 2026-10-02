@@ -34,6 +34,10 @@ const categoryIcons: Record<string, keyof typeof Feather.glyphMap> = {
   creatinas: 'shield',
   aminoácidos: 'activity',
   aminoacidos: 'activity',
+  'pre-entrenos': 'zap',
+  preentrenos: 'zap',
+  multivitamínicos: 'shield',
+  multivitaminicos: 'shield',
 };
 
 function Field({
